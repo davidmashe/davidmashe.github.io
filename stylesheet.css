@@ -43,7 +43,22 @@
       background-size: cover;
       background-position: center;
     }
-
+    body.index {
+      background: url("norris_thumbs.jpg");
+    }
+    body.story {
+      background: url("https://farm9.staticflickr.com/8177/7901438886_04a9314a7a_b.jpg");
+    }
+    body.oracle {
+      background: url("http://www.ancient-origins.net/sites/default/files/styles/large/public/field/image/oracle-delphi.jpg?itok=b5svXLkS");
+    }
+    a.button {
+      -webkit-appearance: button;
+      -moz-appearance: button;
+      appearance: button;
+      text-decoration: none;
+      color: initial;
+      font-size: 30px;
     }
     .story {
       color: rgba(255,255,255,1);
@@ -54,15 +69,6 @@
     .contact {
       color: rgba(255,255,255,1);
     }
-    a.button {
-      -webkit-appearance: button;
-      -moz-appearance: button;
-      appearance: button;
-
-      text-decoration: none;
-      color: initial;
-      font-size: 30px;
-    }    
     @media (max-width: 500px) {
       h1 {
         font-size: 36px;

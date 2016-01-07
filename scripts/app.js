@@ -23,12 +23,15 @@ function handleClick(event){
   console.log('event.target.id is: ' + event.target.id);
   switch (event.target.id) {
     case "conan":
+      $("#" + event.target.id + "-div *").hide();
       showVideo(conanURL, event.target.id);
       break;
     case "singularity":
+      $("#" + event.target.id + "-div *").hide();
       showVideo(singularityURL, event.target.id);
       break;
     case "cake":
+      $("#" + event.target.id + "-div *").hide();    
       showImage(cakeURL, event.target.id);
       break;
     default:
@@ -37,24 +40,31 @@ function handleClick(event){
 }
 
 function showVideo(url, target) {
+  videoAnswer.hide();
+  videoAnswer.attr('src',"");
+  imageAnswer.hide();
+  imageAnswer.attr('src',"");
   videoAnswer.attr('src', url);
   var whatGotClicked = url + "-div";
-  switch (whatGotClicked) {
-    case "conan-div":
-
-      break;
-    case "singularity-div":
-
-      break;
-    case "cake-div":
-
-      break;
-  }
-  videoDiv.show();
+  // switch (whatGotClicked) {
+  //   case "conan-div":
+  //
+  //     break;
+  //   case "singularity-div":
+  //
+  //     break;
+  //   case "cake-div":
+  //
+  //     break;
+  // }
+  videoAnswer.show();
 }
 
 function showImage(url, target) {
   videoAnswer.hide();
+  videoAnswer.attr('src',"");
+  imageAnswer.hide();
+  imageAnswer.attr('src',"");
   imageAnswer.attr('src',url);
-  videoDiv.show();
+  imageAnswer.show();
 }

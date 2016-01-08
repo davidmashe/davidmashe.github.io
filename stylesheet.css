@@ -49,31 +49,35 @@
       padding: 0 0 50px 0;
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
     }
     body.story {
       background: url("https://farm9.staticflickr.com/8177/7901438886_04a9314a7a_b.jpg");
       padding: 0 0 50px 0;
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
     }
     body.oracle {
       background: url("http://www.ancient-origins.net/sites/default/files/styles/large/public/field/image/oracle-delphi.jpg?itok=b5svXLkS");
       padding: 0 0 50px 0;
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
     }
     body.contact {
       background: url("http://s7.computerhistory.org/is/image/CHM/500004289-03-01?$re-medium$");
       padding: 0 0 50px 0;
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
     }
     #omg {
       border-radius: 200px;
     }
     #answer-div {
       margin-top: 50px;
-    }    
+    }
     /*#scroll-container {
       overflow: scroll;
     }*/
@@ -102,6 +106,7 @@
     }
     .title {
       text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+      background: rgba(10,10,10,.75);      
     }
     .story {
       color: rgba(255,255,255,1);

@@ -1,6 +1,6 @@
 var singularityURL = "https://www.youtube.com/embed/it0sf4CMDeM";
 var conanURL = "https://www.youtube.com/embed/Oo9buo9Mtos";
-var cakeURL = "http://www.howtomakechocolatecake.org/wp-content/uploads/2015/03/choc.jpg";
+var cakeURL = "http://www.fnstatic.co.uk/images/source/article/omg-chocolate-cake-7_1.jpg";
 var videoDiv, videoAnswer, imageAnswer, cake, singularity, conan;
 var oracleDiv, singularityDiv, cakeDiv;
 
@@ -31,7 +31,7 @@ function handleClick(event){
       showVideo(singularityURL, event.target.id);
       break;
     case "cake":
-      $("#" + event.target.id + "-div *").hide();    
+      $("#" + event.target.id + "-div *").hide();
       showImage(cakeURL, event.target.id);
       break;
     default:

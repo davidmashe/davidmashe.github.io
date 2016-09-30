@@ -55,6 +55,10 @@ AppDispatcher.register(function(action) {
       _state = {home : false,meetup : true};
       AppStore.emitChange();
       break;
+    case 'home':
+      _state = resetState();
+      AppStore.emitChange();
+      break;
     //default:
   }
 

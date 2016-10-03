@@ -8,20 +8,20 @@ export default React.createClass({
         <h1>Hey Breh!</h1>
         <p>{this.props.text}</p>
         <div className="button-bucket">
-          <div className="button-box">
-            <RaisedButton id="info-button" onClick={this.props.onInfo}
-              label="RESUME & INFO" primary={true}/>
+          <div id="resume-box" className="button-box">
+            <RaisedButton id="info-button" onClick={this.props.clickHandler}
+              label="RESUME & INFO" primary={true} />
           </div>
-          <div className="button-box">
-            <RaisedButton id="projects-button" onClick={this.props.onProjects}
-              label="PROJECTS" primary={false}/>
+          <div id="project-box" className="button-box">
+            <RaisedButton id="projects-button" onClick={this.props.clickHandler}
+              label="PROJECTS" primary={false} />
           </div>
-          <div className="button-box">
-            <RaisedButton id="meetup-button" onClick={this.props.onMeetup}
+          <div id="meetup-box" className="button-box">
+            <RaisedButton id="meetup-button" onClick={this.props.clickHandler}
               label="THE MEETUP" secondary={true} />
           </div>
-          <div className="button-box">
-            <RaisedButton id="oracle-button" onClick={this.props.onOracle}
+          <div id="oracle-box" className="button-box">
+            <RaisedButton id="oracle-button" onClick={this.props.clickHandler}
               label="ASK THE ORACLE" primary={true} />
           </div>
         </div>

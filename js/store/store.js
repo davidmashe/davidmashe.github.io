@@ -1,15 +1,17 @@
 import {EventEmitter} from 'events';
 import assign from 'object-assign';
 import AppDispatcher from '../dispatcher/dispatcher.js';
+import AppLib from '../lib/library.js';
 
-var resetState = function(){
-  return {
-    home : true,
-    defaultText : "Thanks for visiting my portfolio app! I built it with React & Flux"
-  };
-}
+var ORACLE_STATE = AppLib.stateTemplates.oracle;
+var INFO_STATE = AppLib.stateTemplates.info;
+var MEETUP_STATE = AppLib.stateTemplates.meetup;
+var PROJECTS_STATE = AppLib.stateTemplates.projects;
+var HOME_STATE = AppLib.stateTemplates.home;
 
-var _state = resetState();
+var _state = HOME_STATE;
+
+//create the AppStore object
 
 var AppStore = assign({}, EventEmitter.prototype, {
   emitChange: function() {
@@ -28,35 +30,37 @@ var AppStore = assign({}, EventEmitter.prototype, {
   }
 });
 
-// Register callback to handle all updates
+// Register with dispatcher so that the store will
+// handle all actions thrown by app
+
 AppDispatcher.register(function(action) {
   var searched;
   var focusImage;
   var type = action.type;
 
   switch(type){
-    case 'textChange':
+    case 'textChange': // test only
       _state.defaultText = action.value;
       AppStore.emitChange();
       break;
     case 'info':
-      _state = {home : false,info : true};
+      _state = INFO_STATE;
       AppStore.emitChange();
       break;
     case 'oracle':
-      _state = {home : false,oracle : true};
+      _state = ORACLE_STATE;
       AppStore.emitChange();
       break;
     case 'projects':
-      _state = {home : false,projects : true};
+      _state = PROJECT_STATE;
       AppStore.emitChange();
       break;
     case 'meetup':
-      _state = {home : false,meetup : true};
+      _state = MEETUP_STATE;
       AppStore.emitChange();
       break;
     case 'home':
-      _state = resetState();
+      _state = HOME_STATE;
       AppStore.emitChange();
       break;
     //default:

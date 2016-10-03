@@ -8,7 +8,7 @@ export default React.createClass({
     Dispatcher.dispatch({type:'home'});
   },
   getAnswer(event){
-
+    window.e = event.nativeEvent;
   },
   render : function(){
     return (

@@ -5,6 +5,8 @@ import Dispatcher from './dispatcher/dispatcher.js';
 import Home from './home.jsx';
 import ChoiceDisplay from './choice-display.jsx';
 import Lib from './lib/library.jsx';
+import Oracle from './oracle.jsx';
+import Info from './info.jsx';
 
 export default React.createClass({
   componentDidMount : function(){
@@ -19,39 +21,31 @@ export default React.createClass({
   onClick : function(event){
     //window.breh = event.nativeEvent;
     var keyWord = Lib.getIdFromDOM(event.target);
-    if (debug) console.log("you fuckin clicked",keyWord + ',',"bruh");
+    if (debug) console.log("you clicked",keyWord + ',',"bruh");
     Dispatcher.dispatch({type:keyWord});
   },
   render : function(){
-    if (debug) console.log("state @ render:",this.state);
-    if (this.state.home){
+    var datState = this.state;
+    if (debug) console.log("appcontainer state at render:",datState);
+    if (datState.home){
       return (
         <Home clickHandler={this.onClick}
-          text={this.state.defaultText} />
+          text={datState.defaultText} />
       );
-    } else if (this.state.oracle){
-      var props = this.state.oracleProps;
+    } else if (datState.project){
       return (
-        <ChoiceDisplay motif="oracle" clickHandler={this.onClick}
-          specifics={this.state.specifics} />
+        <ChoiceDisplay clickHandler={this.onClick}
+          specifics={datState.specifics} miniDOM={datState.specifics.miniDOM}/>
       );
-    } else if (this.state.projects){
-      var props = this.state.projectsProps;
+    } else if (datState.oracle){
       return (
-        <ChoiceDisplay motif="projects" onClick={this.onClick}
-          specifics={this.state.specifics} />
+        <Oracle clickHandler={this.onClick}
+          specifics={datState.specifics} />
       );
-    } else if (this.state.info){
-      var props = this.state.infoProps;
+    } else if (datState.info){
       return (
-        <ChoiceDisplay motif="info" onClick={this.onClick}
-          specifics={this.state.specifics} />
-      );
-    } else if (this.state.meetup){
-      var props = this.state.meetupProps;
-      return (
-        <ChoiceDisplay motif="meetup" onClick={this.onClick}
-          specifics={this.state.specifics} />
+        <Info clickHandler={this.onClick}
+          specifics={datState.specifics} />
       );
     }
   }// close render function

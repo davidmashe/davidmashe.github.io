@@ -34,7 +34,8 @@ export default {
         ),
         headerText : "The mighty Oracle!",
         imageURL : null
-      }
+      },
+      subState : { answered : false }
     },
     info : {
       info : true,
@@ -48,7 +49,8 @@ export default {
         ),
         headerText : "Here's My Deal",
         imageURL : null
-      }
+      },
+      subState : { clicked : false }
     },
     project : {
       project : true,

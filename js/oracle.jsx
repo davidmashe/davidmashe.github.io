@@ -2,31 +2,25 @@ import React from 'react';
 import {RaisedButton} from 'material-ui';
 import AppStore from './store/store.js';
 import Dispatcher from './dispatcher/dispatcher.js';
+import AppLib from './lib/library.jsx';
 
 export default React.createClass({
   goBack : function(){
     Dispatcher.dispatch({type:'home'});
   },
-  getAnswer(event){
-    window.e = event.nativeEvent;
-  },
   render : function(){
+    var props = this.props.specifics;
+    var miniDOM = this.props.miniDOM
     return (
       <div>
-        <h1>{this.props.oracleHeaderText}</h1>
-        <div className="oracle-image-box">
-          <img src={this.props.oracleImage} />
+        <h1>{props.headerText}</h1>
+        <div className="image-box">
+          <img src={props.imageURL} />
         </div>
-        <div className="question-button-box">
-          <p>What is Best In Life?</p>
-          <RaisedButton label="LAY IT ON ME" primary={true}
-            onClick={this.getAnswer} />
-        </div>
-        <div className="display-box">
-        </div>
-        <div>
+        {miniDOM}
+        <div id="home-box" className="button-box">
           <RaisedButton label="<-BACK" primary={true}
-            onClick={this.goBack} />
+            onClick={this.props.clickHandler} />
         </div>
       </div>
     );

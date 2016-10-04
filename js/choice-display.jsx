@@ -24,13 +24,13 @@ export default React.createClass({
     Dispatcher.dispatch({type:'home'});
   },
   render : function(){
-    var props = this.props.specifics;
+    var demProps = this.props.specifics;
     var miniDOM = this.props.miniDOM
     return (
       <div>
-        <h1>{props.headerText}</h1>
+        <h1>{demProps.headerText}</h1>
         <div className="image-box">
-          <img src={props.imageURL} />
+          <img src={demProps.imageURL} />
         </div>
         {miniDOM}
         <div id="home-box" className="button-box">

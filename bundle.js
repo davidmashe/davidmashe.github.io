@@ -21476,6 +21476,14 @@
 
 	var _library2 = _interopRequireDefault(_library);
 
+	var _oracle = __webpack_require__(546);
+
+	var _oracle2 = _interopRequireDefault(_oracle);
+
+	var _info = __webpack_require__(547);
+
+	var _info2 = _interopRequireDefault(_info);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
@@ -21493,30 +21501,24 @@
 	  onClick: function onClick(event) {
 	    //window.breh = event.nativeEvent;
 	    var keyWord = _library2.default.getIdFromDOM(event.target);
-	    if (debug) console.log("you fuckin clicked", keyWord + ',', "bruh");
+	    if (debug) console.log("you clicked", keyWord + ',', "bruh");
 	    _dispatcher2.default.dispatch({ type: keyWord });
 	  },
 	  render: function render() {
-	    if (debug) console.log("state @ render:", this.state);
-	    if (this.state.home) {
+	    var datState = this.state;
+	    if (debug) console.log("appcontainer state at render:", datState);
+	    if (datState.home) {
 	      return _react2.default.createElement(_home2.default, { clickHandler: this.onClick,
-	        text: this.state.defaultText });
-	    } else if (this.state.oracle) {
-	      var props = this.state.oracleProps;
-	      return _react2.default.createElement(_choiceDisplay2.default, { motif: 'oracle', clickHandler: this.onClick,
-	        specifics: this.state.specifics });
-	    } else if (this.state.projects) {
-	      var props = this.state.projectsProps;
-	      return _react2.default.createElement(_choiceDisplay2.default, { motif: 'projects', onClick: this.onClick,
-	        specifics: this.state.specifics });
-	    } else if (this.state.info) {
-	      var props = this.state.infoProps;
-	      return _react2.default.createElement(_choiceDisplay2.default, { motif: 'info', onClick: this.onClick,
-	        specifics: this.state.specifics });
-	    } else if (this.state.meetup) {
-	      var props = this.state.meetupProps;
-	      return _react2.default.createElement(_choiceDisplay2.default, { motif: 'meetup', onClick: this.onClick,
-	        specifics: this.state.specifics });
+	        text: datState.defaultText });
+	    } else if (datState.project) {
+	      return _react2.default.createElement(_choiceDisplay2.default, { clickHandler: this.onClick,
+	        specifics: datState.specifics, miniDOM: datState.specifics.miniDOM });
+	    } else if (datState.oracle) {
+	      return _react2.default.createElement(_oracle2.default, { clickHandler: this.onClick,
+	        specifics: datState.specifics });
+	    } else if (datState.info) {
+	      return _react2.default.createElement(_info2.default, { clickHandler: this.onClick,
+	        specifics: datState.specifics });
 	    }
 	  } // close render function
 	});
@@ -22295,7 +22297,8 @@
 	        ),
 	        headerText: "The mighty Oracle!",
 	        imageURL: null
-	      }
+	      },
+	      subState: { answered: false }
 	    },
 	    info: {
 	      info: true,
@@ -22317,7 +22320,8 @@
 	        ),
 	        headerText: "Here's My Deal",
 	        imageURL: null
-	      }
+	      },
+	      subState: { clicked: false }
 	    },
 	    project: {
 	      project: true,
@@ -59177,7 +59181,7 @@
 	    _dispatcher2.default.dispatch({ type: 'home' });
 	  },
 	  render: function render() {
-	    var props = this.props.specifics;
+	    var demProps = this.props.specifics;
 	    var miniDOM = this.props.miniDOM;
 	    return _react2.default.createElement(
 	      'div',
@@ -59185,12 +59189,12 @@
 	      _react2.default.createElement(
 	        'h1',
 	        null,
-	        props.headerText
+	        demProps.headerText
 	      ),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'image-box' },
-	        _react2.default.createElement('img', { src: props.imageURL })
+	        _react2.default.createElement('img', { src: demProps.imageURL })
 	      ),
 	      miniDOM,
 	      _react2.default.createElement(
@@ -59215,6 +59219,132 @@
 	OPTIONAL
 	- show an image
 	*/
+
+/***/ },
+/* 546 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(168);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _materialUi = __webpack_require__(184);
+
+	var _store = __webpack_require__(176);
+
+	var _store2 = _interopRequireDefault(_store);
+
+	var _dispatcher = __webpack_require__(178);
+
+	var _dispatcher2 = _interopRequireDefault(_dispatcher);
+
+	var _library = __webpack_require__(182);
+
+	var _library2 = _interopRequireDefault(_library);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'oracle',
+
+	  goBack: function goBack() {
+	    _dispatcher2.default.dispatch({ type: 'home' });
+	  },
+	  render: function render() {
+	    var props = this.props.specifics;
+	    var miniDOM = this.props.miniDOM;
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        props.headerText
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'image-box' },
+	        _react2.default.createElement('img', { src: props.imageURL })
+	      ),
+	      miniDOM,
+	      _react2.default.createElement(
+	        'div',
+	        { id: 'home-box', className: 'button-box' },
+	        _react2.default.createElement(_materialUi.RaisedButton, { label: '<-BACK', primary: true,
+	          onClick: this.props.clickHandler })
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 547 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(168);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _materialUi = __webpack_require__(184);
+
+	var _store = __webpack_require__(176);
+
+	var _store2 = _interopRequireDefault(_store);
+
+	var _dispatcher = __webpack_require__(178);
+
+	var _dispatcher2 = _interopRequireDefault(_dispatcher);
+
+	var _library = __webpack_require__(182);
+
+	var _library2 = _interopRequireDefault(_library);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'info',
+
+	  goBack: function goBack() {
+	    _dispatcher2.default.dispatch({ type: 'home' });
+	  },
+	  render: function render() {
+	    var demProps = this.props.specifics;
+	    var miniDOM = this.props.miniDOM;
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        demProps.headerText
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'image-box' },
+	        _react2.default.createElement('img', { src: demProps.imageURL })
+	      ),
+	      miniDOM,
+	      _react2.default.createElement(
+	        'div',
+	        { id: 'home-box', className: 'button-box' },
+	        _react2.default.createElement(_materialUi.RaisedButton, { label: '<-BACK', primary: true,
+	          onClick: this.props.clickHandler })
+	      )
+	    );
+	  }
+	});
 
 /***/ }
 /******/ ]);

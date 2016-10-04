@@ -1,12 +1,12 @@
 import {EventEmitter} from 'events';
 import assign from 'object-assign';
 import AppDispatcher from '../dispatcher/dispatcher.js';
-import AppLib from '../lib/library.js';
+import AppLib from '../lib/library.jsx';
 
 var ORACLE_STATE = AppLib.stateTemplates.oracle;
 var INFO_STATE = AppLib.stateTemplates.info;
 var MEETUP_STATE = AppLib.stateTemplates.meetup;
-var PROJECTS_STATE = AppLib.stateTemplates.projects;
+var PROJECT_STATE = AppLib.stateTemplates.project;
 var HOME_STATE = AppLib.stateTemplates.home;
 
 var _state = HOME_STATE;
@@ -51,14 +51,14 @@ AppDispatcher.register(function(action) {
       _state = ORACLE_STATE;
       AppStore.emitChange();
       break;
-    case 'projects':
+    case 'project':
       _state = PROJECT_STATE;
       AppStore.emitChange();
       break;
-    case 'meetup':
-      _state = MEETUP_STATE;
-      AppStore.emitChange();
-      break;
+    // case 'meetup':
+    //   _state = MEETUP_STATE;
+    //   AppStore.emitChange();
+    //   break;
     case 'home':
       _state = HOME_STATE;
       AppStore.emitChange();

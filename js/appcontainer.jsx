@@ -4,7 +4,7 @@ import Store from './store/store.js';
 import Dispatcher from './dispatcher/dispatcher.js';
 import Home from './home.jsx';
 import ChoiceDisplay from './choice-display.jsx';
-import Lib from './lib/library.js';
+import Lib from './lib/library.jsx';
 
 export default React.createClass({
   componentDidMount : function(){
@@ -17,9 +17,10 @@ export default React.createClass({
     return (Store.getState());
   },
   onClick : function(event){
-    window.breh = event.nativeEvent;
+    //window.breh = event.nativeEvent;
     var keyWord = Lib.getIdFromDOM(event.target);
     if (debug) console.log("you fuckin clicked",keyWord + ',',"bruh");
+    Dispatcher.dispatch({type:keyWord});
   },
   render : function(){
     if (debug) console.log("state @ render:",this.state);
@@ -31,22 +32,26 @@ export default React.createClass({
     } else if (this.state.oracle){
       var props = this.state.oracleProps;
       return (
-        <ChoiceDisplay motif="oracle" clickHandler={this.onClick} />
+        <ChoiceDisplay motif="oracle" clickHandler={this.onClick}
+          specifics={this.state.specifics} />
       );
     } else if (this.state.projects){
       var props = this.state.projectsProps;
       return (
-        <ChoiceDisplay motif="projects" onClick={this.onClick} />
+        <ChoiceDisplay motif="projects" onClick={this.onClick}
+          specifics={this.state.specifics} />
       );
     } else if (this.state.info){
       var props = this.state.infoProps;
       return (
-        <ChoiceDisplay motif="info" onClick={this.onClick} />
+        <ChoiceDisplay motif="info" onClick={this.onClick}
+          specifics={this.state.specifics} />
       );
     } else if (this.state.meetup){
       var props = this.state.meetupProps;
       return (
-        <ChoiceDisplay motif="meetup" onClick={this.onClick} />
+        <ChoiceDisplay motif="meetup" onClick={this.onClick}
+          specifics={this.state.specifics} />
       );
     }
   }// close render function

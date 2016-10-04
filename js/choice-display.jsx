@@ -1,4 +1,9 @@
 /*
+** This is my attempt at a re-usable component. You know,
+** to use what is arguably react's best feature.
+*/
+
+/*
 STATIC REQUIREMENTS
 - back button
 - gets an array of named actions that become div wrappers with name as id
@@ -12,34 +17,25 @@ import React from 'react';
 import {RaisedButton} from 'material-ui';
 import AppStore from './store/store.js';
 import Dispatcher from './dispatcher/dispatcher.js';
-import AppLib from './lib/library.js';
+import AppLib from './lib/library.jsx';
 
 export default React.createClass({
-  // componentDidMount : function(){
-  //
-  // },
   goBack : function(){
     Dispatcher.dispatch({type:'home'});
   },
-  handleClick(event){
-    actionKey = AppLib.getIdFromDOM(event);
-    this.props.onClick(actionKey);
-  },
-  getChoiceListElements : function(props){
-    return (<div>choice list will go here</div>);
-  },
   render : function(){
-    var choiceList = getChoiceListElements(this.props);
+    var props = this.props.specifics;
+    var miniDOM = this.props.miniDOM
     return (
       <div>
-        <h1>{this.props.oracleHeaderText}</h1>
+        <h1>{props.headerText}</h1>
         <div className="image-box">
-          <img src={this.props.oracleImage} />
+          <img src={props.imageURL} />
         </div>
-        {choiceList}
-        <div id="choice-box-back">
+        {miniDOM}
+        <div id="home-box" className="button-box">
           <RaisedButton label="<-BACK" primary={true}
-            onClick={this.handleClick} />
+            onClick={this.props.clickHandler} />
         </div>
       </div>
     );

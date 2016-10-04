@@ -4,11 +4,11 @@ import AppContainer from './appcontainer.jsx';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 window.$ = "I said I built it in React, son!";
-window.debug = true;
+window.debug = false;
 
-window.say = function(...array){
-  if (debug) console.log(array);
-};
+// window.say = function(...array){
+//   if (debug) console.log(array);
+// };
 
 ReactDOM.render(
   <MuiThemeProvider>

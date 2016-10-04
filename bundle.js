@@ -65,15 +65,11 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	window.$ = "I said I built it in React, son!";
-	window.debug = true;
+	window.debug = false;
 
-	window.say = function () {
-	  for (var _len = arguments.length, array = Array(_len), _key = 0; _key < _len; _key++) {
-	    array[_key] = arguments[_key];
-	  }
-
-	  if (debug) console.log(array);
-	};
+	// window.say = function(...array){
+	//   if (debug) console.log(array);
+	// };
 
 	_reactDom2.default.render(_react2.default.createElement(
 	  _MuiThemeProvider2.default,
@@ -21495,9 +21491,10 @@
 	    return _store2.default.getState();
 	  },
 	  onClick: function onClick(event) {
-	    window.breh = event.nativeEvent;
+	    //window.breh = event.nativeEvent;
 	    var keyWord = _library2.default.getIdFromDOM(event.target);
 	    if (debug) console.log("you fuckin clicked", keyWord + ',', "bruh");
+	    _dispatcher2.default.dispatch({ type: keyWord });
 	  },
 	  render: function render() {
 	    if (debug) console.log("state @ render:", this.state);
@@ -21506,16 +21503,20 @@
 	        text: this.state.defaultText });
 	    } else if (this.state.oracle) {
 	      var props = this.state.oracleProps;
-	      return _react2.default.createElement(_choiceDisplay2.default, { motif: 'oracle', clickHandler: this.onClick });
+	      return _react2.default.createElement(_choiceDisplay2.default, { motif: 'oracle', clickHandler: this.onClick,
+	        specifics: this.state.specifics });
 	    } else if (this.state.projects) {
 	      var props = this.state.projectsProps;
-	      return _react2.default.createElement(_choiceDisplay2.default, { motif: 'projects', onClick: this.onClick });
+	      return _react2.default.createElement(_choiceDisplay2.default, { motif: 'projects', onClick: this.onClick,
+	        specifics: this.state.specifics });
 	    } else if (this.state.info) {
 	      var props = this.state.infoProps;
-	      return _react2.default.createElement(_choiceDisplay2.default, { motif: 'info', onClick: this.onClick });
+	      return _react2.default.createElement(_choiceDisplay2.default, { motif: 'info', onClick: this.onClick,
+	        specifics: this.state.specifics });
 	    } else if (this.state.meetup) {
 	      var props = this.state.meetupProps;
-	      return _react2.default.createElement(_choiceDisplay2.default, { motif: 'meetup', onClick: this.onClick });
+	      return _react2.default.createElement(_choiceDisplay2.default, { motif: 'meetup', onClick: this.onClick,
+	        specifics: this.state.specifics });
 	    }
 	  } // close render function
 	});
@@ -21546,7 +21547,7 @@
 	var ORACLE_STATE = _library2.default.stateTemplates.oracle;
 	var INFO_STATE = _library2.default.stateTemplates.info;
 	var MEETUP_STATE = _library2.default.stateTemplates.meetup;
-	var PROJECTS_STATE = _library2.default.stateTemplates.projects;
+	var PROJECT_STATE = _library2.default.stateTemplates.project;
 	var HOME_STATE = _library2.default.stateTemplates.home;
 
 	var _state = HOME_STATE;
@@ -21592,14 +21593,14 @@
 	      _state = ORACLE_STATE;
 	      AppStore.emitChange();
 	      break;
-	    case 'projects':
+	    case 'project':
 	      _state = PROJECT_STATE;
 	      AppStore.emitChange();
 	      break;
-	    case 'meetup':
-	      _state = MEETUP_STATE;
-	      AppStore.emitChange();
-	      break;
+	    // case 'meetup':
+	    //   _state = MEETUP_STATE;
+	    //   AppStore.emitChange();
+	    //   break;
 	    case 'home':
 	      _state = HOME_STATE;
 	      AppStore.emitChange();
@@ -22238,24 +22239,34 @@
 
 /***/ },
 /* 182 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _react = __webpack_require__(168);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	function _getIdFromDOM(element) {
-	  console.log("lib function got a target node of:", element);
 	  if (element.className === "button-box") {
 	    if (element.id) {
 	      var hyphen = element.id.indexOf('-');
 	      return element.id.slice(0, hyphen);
+	    } else {
+	      if (debug) console.log("_getIdFromDOM found no id property for this element");
+	      return 'error';
 	    }
 	  } else if (element.parentElement) {
 	    return _getIdFromDOM(element.parentElement);
 	  } else {
-	    console.log("getIdFromDOM ran out of parents");
+	    if (debug) console.log("getIdFromDOM ran out of parents");
+	    return 'error';
 	  }
 	}
 
@@ -22266,25 +22277,77 @@
 	  stateTemplates: {
 	    oracle: {
 	      oracle: true,
-	      home: false
+	      home: false,
+	      specifics: {
+	        miniDOM: _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'image goes here'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'other element goes here'
+	          )
+	        ),
+	        headerText: "The mighty Oracle!",
+	        imageURL: null
+	      }
 	    },
 	    info: {
-	      oracle: true,
-	      home: false
+	      info: true,
+	      home: false,
+	      specifics: {
+	        miniDOM: _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'image goes here'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'other element goes here'
+	          )
+	        ),
+	        headerText: "Here's My Deal",
+	        imageURL: null
+	      }
 	    },
-	    meetup: {
-	      oracle: true,
-	      home: false
-	    },
-	    projects: {
-	      oracle: true,
-	      home: false
+	    project: {
+	      project: true,
+	      home: false,
+	      specifics: {
+	        miniDOM: _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'image goes here'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'other element goes here'
+	          )
+	        ),
+	        headerText: "Stuff I've Built",
+	        imageURL: null
+	      }
 	    },
 	    home: {
 	      home: true,
-	      defaultText: "Thanks for visiting my portfolio app! I built it with React & Flux"
+	      defaultText: "Thanks for visiting my portfolio app! Built with React & Flux"
 	    }
-	  } };
+	  } // close stateTemplates
+
+	};
 
 /***/ },
 /* 183 */
@@ -22326,7 +22389,7 @@
 	        { className: 'button-bucket' },
 	        _react2.default.createElement(
 	          'div',
-	          { id: 'resume-box', className: 'button-box' },
+	          { id: 'info-box', className: 'button-box' },
 	          _react2.default.createElement(_materialUi.RaisedButton, { id: 'info-button', onClick: this.props.clickHandler,
 	            label: 'RESUME & INFO', primary: true })
 	        ),
@@ -22338,15 +22401,9 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { id: 'meetup-box', className: 'button-box' },
-	          _react2.default.createElement(_materialUi.RaisedButton, { id: 'meetup-button', onClick: this.props.clickHandler,
-	            label: 'THE MEETUP', secondary: true })
-	        ),
-	        _react2.default.createElement(
-	          'div',
 	          { id: 'oracle-box', className: 'button-box' },
 	          _react2.default.createElement(_materialUi.RaisedButton, { id: 'oracle-button', onClick: this.props.clickHandler,
-	            label: 'ASK THE ORACLE', primary: true })
+	            label: 'ASK THE ORACLE', secondary: true })
 	        )
 	      )
 	    );
@@ -59116,57 +59173,48 @@
 	exports.default = _react2.default.createClass({
 	  displayName: 'choice-display',
 
-	  // componentDidMount : function(){
-	  //
-	  // },
 	  goBack: function goBack() {
 	    _dispatcher2.default.dispatch({ type: 'home' });
 	  },
-	  handleClick: function handleClick(event) {
-	    actionKey = _library2.default.getIdFromDOM(event);
-	    this.props.onClick(actionKey);
-	  },
-
-	  getChoiceListElements: function getChoiceListElements(props) {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      'choice list will go here'
-	    );
-	  },
 	  render: function render() {
-	    var choiceList = getChoiceListElements(this.props);
+	    var props = this.props.specifics;
+	    var miniDOM = this.props.miniDOM;
 	    return _react2.default.createElement(
 	      'div',
 	      null,
 	      _react2.default.createElement(
 	        'h1',
 	        null,
-	        this.props.oracleHeaderText
+	        props.headerText
 	      ),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'image-box' },
-	        _react2.default.createElement('img', { src: this.props.oracleImage })
+	        _react2.default.createElement('img', { src: props.imageURL })
 	      ),
-	      choiceList,
+	      miniDOM,
 	      _react2.default.createElement(
 	        'div',
-	        { id: 'choice-box-back' },
+	        { id: 'home-box', className: 'button-box' },
 	        _react2.default.createElement(_materialUi.RaisedButton, { label: '<-BACK', primary: true,
-	          onClick: this.handleClick })
+	          onClick: this.props.clickHandler })
 	      )
 	    );
 	  }
 	}); /*
-	    STATIC REQUIREMENTS
-	    - back button
-	    - gets an array of named actions that become div wrappers with name as id
-	      each div wrapper contains button which launches that action, based on id name
-	    
-	    OPTIONAL
-	    - show an image
+	    ** This is my attempt at a re-usable component. You know,
+	    ** to use what is arguably react's best feature.
 	    */
+
+	/*
+	STATIC REQUIREMENTS
+	- back button
+	- gets an array of named actions that become div wrappers with name as id
+	  each div wrapper contains button which launches that action, based on id name
+
+	OPTIONAL
+	- show an image
+	*/
 
 /***/ }
 /******/ ]);

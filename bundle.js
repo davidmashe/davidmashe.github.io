@@ -21468,9 +21468,9 @@
 
 	var _home2 = _interopRequireDefault(_home);
 
-	var _choiceDisplay = __webpack_require__(545);
+	var _projects = __webpack_require__(545);
 
-	var _choiceDisplay2 = _interopRequireDefault(_choiceDisplay);
+	var _projects2 = _interopRequireDefault(_projects);
 
 	var _library = __webpack_require__(182);
 
@@ -21505,20 +21505,20 @@
 	    _dispatcher2.default.dispatch({ type: keyWord });
 	  },
 	  render: function render() {
-	    var datState = this.state;
-	    if (debug) console.log("appcontainer state at render:", datState);
-	    if (datState.home) {
+	    var state = this.state;
+	    if (debug) console.log("appcontainer state at render:", state);
+	    if (state.home) {
 	      return _react2.default.createElement(_home2.default, { clickHandler: this.onClick,
-	        text: datState.defaultText });
-	    } else if (datState.project) {
-	      return _react2.default.createElement(_choiceDisplay2.default, { clickHandler: this.onClick,
-	        specifics: datState.specifics, miniDOM: datState.specifics.miniDOM });
-	    } else if (datState.oracle) {
+	        text: state.defaultText });
+	    } else if (state.project) {
+	      return _react2.default.createElement(_projects2.default, { clickHandler: this.onClick,
+	        specifics: state.specifics });
+	    } else if (state.oracle) {
 	      return _react2.default.createElement(_oracle2.default, { clickHandler: this.onClick,
-	        specifics: datState.specifics });
-	    } else if (datState.info) {
+	        specifics: state.specifics });
+	    } else if (state.info) {
 	      return _react2.default.createElement(_info2.default, { clickHandler: this.onClick,
-	        specifics: datState.specifics });
+	        specifics: state.specifics });
 	    }
 	  } // close render function
 	});
@@ -22395,19 +22395,19 @@
 	          'div',
 	          { id: 'info-box', className: 'button-box' },
 	          _react2.default.createElement(_materialUi.RaisedButton, { id: 'info-button', onClick: this.props.clickHandler,
-	            label: 'RESUME & INFO', primary: true })
+	            label: 'RESUME & INFO', primary: true, className: 'app-button' })
 	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { id: 'project-box', className: 'button-box' },
 	          _react2.default.createElement(_materialUi.RaisedButton, { id: 'projects-button', onClick: this.props.clickHandler,
-	            label: 'PROJECTS', primary: false })
+	            label: 'PROJECTS', primary: false, className: 'app-button' })
 	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { id: 'oracle-box', className: 'button-box' },
 	          _react2.default.createElement(_materialUi.RaisedButton, { id: 'oracle-button', onClick: this.props.clickHandler,
-	            label: 'ASK THE ORACLE', secondary: true })
+	            label: 'ASK THE ORACLE', secondary: true, className: 'app-button' })
 	        )
 	      )
 	    );
@@ -59160,22 +59160,16 @@
 
 	var _materialUi = __webpack_require__(184);
 
-	var _store = __webpack_require__(176);
-
-	var _store2 = _interopRequireDefault(_store);
-
 	var _dispatcher = __webpack_require__(178);
 
 	var _dispatcher2 = _interopRequireDefault(_dispatcher);
 
-	var _library = __webpack_require__(182);
-
-	var _library2 = _interopRequireDefault(_library);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// import AppLib from '../lib/library.jsx';
+
 	exports.default = _react2.default.createClass({
-	  displayName: 'choice-display',
+	  displayName: 'projects',
 
 	  goBack: function goBack() {
 	    _dispatcher2.default.dispatch({ type: 'home' });
@@ -59205,20 +59199,8 @@
 	      )
 	    );
 	  }
-	}); /*
-	    ** This is my attempt at a re-usable component. You know,
-	    ** to use what is arguably react's best feature.
-	    */
-
-	/*
-	STATIC REQUIREMENTS
-	- back button
-	- gets an array of named actions that become div wrappers with name as id
-	  each div wrapper contains button which launches that action, based on id name
-
-	OPTIONAL
-	- show an image
-	*/
+	});
+	// import AppStore from '../store/store.js';
 
 /***/ },
 /* 546 */
@@ -59236,19 +59218,13 @@
 
 	var _materialUi = __webpack_require__(184);
 
-	var _store = __webpack_require__(176);
-
-	var _store2 = _interopRequireDefault(_store);
-
 	var _dispatcher = __webpack_require__(178);
 
 	var _dispatcher2 = _interopRequireDefault(_dispatcher);
 
-	var _library = __webpack_require__(182);
-
-	var _library2 = _interopRequireDefault(_library);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// import AppLib from '../lib/library.jsx';
 
 	exports.default = _react2.default.createClass({
 	  displayName: 'oracle',
@@ -59282,6 +59258,7 @@
 	    );
 	  }
 	});
+	// import AppStore from '../store/store.js';
 
 /***/ },
 /* 547 */
@@ -59299,19 +59276,13 @@
 
 	var _materialUi = __webpack_require__(184);
 
-	var _store = __webpack_require__(176);
-
-	var _store2 = _interopRequireDefault(_store);
-
 	var _dispatcher = __webpack_require__(178);
 
 	var _dispatcher2 = _interopRequireDefault(_dispatcher);
 
-	var _library = __webpack_require__(182);
-
-	var _library2 = _interopRequireDefault(_library);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// import AppLib from '../lib/library.jsx';
 
 	exports.default = _react2.default.createClass({
 	  displayName: 'info',
@@ -59345,6 +59316,7 @@
 	    );
 	  }
 	});
+	// import AppStore from '../store/store.js';
 
 /***/ }
 /******/ ]);

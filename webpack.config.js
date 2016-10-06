@@ -1,5 +1,5 @@
 var WebpackConfig = {
-entry: "./js/app.jsx",
+entry: "./js/components/app.jsx",
  output: {
    filename: "./bundle.js"
  },

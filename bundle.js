@@ -65,7 +65,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	window.$ = "I said I built it in React, son!";
-	window.debug = false;
+	window.debug = true;
 
 	// window.say = function(...array){
 	//   if (debug) console.log(array);
@@ -21514,8 +21514,7 @@
 	      return _react2.default.createElement(_projects2.default, { clickHandler: this.onClick,
 	        specifics: state.specifics });
 	    } else if (state.oracle) {
-	      return _react2.default.createElement(_oracle2.default, { clickHandler: this.onClick,
-	        specifics: state.specifics });
+	      return _react2.default.createElement(_oracle2.default, { clickHandler: this.onClick, stateTransfer: state });
 	    } else if (state.info) {
 	      return _react2.default.createElement(_info2.default, { clickHandler: this.onClick,
 	        specifics: state.specifics });
@@ -21607,7 +21606,8 @@
 	      _state = HOME_STATE;
 	      AppStore.emitChange();
 	      break;
-	    //default:
+	    default:
+	      console.log("RUH ROH, STATE DOESN'T KNOW THAT DITTY");
 	  }
 	}); // close register function
 
@@ -22280,67 +22280,35 @@
 	    oracle: {
 	      oracle: true,
 	      home: false,
-	      specifics: {
-	        miniDOM: _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'div',
-	            null,
-	            'image goes here'
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            null,
-	            'other element goes here'
-	          )
-	        ),
-	        headerText: "The mighty Oracle!",
-	        imageURL: null
+	      headerText: "The mighty Oracle!",
+	      imageURL: null,
+	      subState: {
+	        singularity: false,
+	        stable: false,
+	        best: false,
+	        lastAnswered: ""
 	      },
-	      subState: { answered: false }
+	      questions: {
+	        singularity: "Oracle, what will the singularity be like?",
+	        stable: "Oracle, how do we keep our minds and hearts stable in stressful times?",
+	        best: "Oracle, what is best in life?"
+	      }
 	    },
 	    info: {
 	      info: true,
 	      home: false,
 	      specifics: {
-	        miniDOM: _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'div',
-	            null,
-	            'image goes here'
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            null,
-	            'other element goes here'
-	          )
-	        ),
 	        headerText: "Here's My Deal",
 	        imageURL: null
 	      },
-	      subState: { clicked: false }
+	      subState: {
+	        clicked: false
+	      }
 	    },
 	    project: {
 	      project: true,
 	      home: false,
 	      specifics: {
-	        miniDOM: _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'div',
-	            null,
-	            'image goes here'
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            null,
-	            'other element goes here'
-	          )
-	        ),
 	        headerText: "Stuff I've Built",
 	        imageURL: null
 	      }
@@ -59232,21 +59200,76 @@
 	  goBack: function goBack() {
 	    _dispatcher2.default.dispatch({ type: 'home' });
 	  },
+	  clickHandler: function clickHandler(event) {
+	    //modify this.props.stateObject, then...
+	    this.props.clickHandler(this.props.stateObject);
+	  },
+	  getMiniDOMFromSubState: function getMiniDOMFromSubState(stateObject) {
+	    var clickFunc = this.clickHandler;
+	    var singularityAsked = stateObject.singularity;
+	    var stableAsked = stateObject.stable;
+	    var bestAsked = stateObject.best;
+	    // each of the three child nodes below depends on a boolean,
+	    // i.e. singularity asked = true / false
+	    // hide asked = false, show lastAsked value
+	    if (!singularityAsked && !stableAsked && !bestAsked) {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'oracle-mini-DOM' },
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'singularity-box', className: 'button-box' },
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            stateObject.questions.singularity
+	          ),
+	          _react2.default.createElement(_materialUi.RaisedButton, { label: 'GIVE ANSWER NOW', primary: false,
+	            onClick: clickFunc })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'stable-box', className: 'button-box' },
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            stateObject.questions.stable
+	          ),
+	          _react2.default.createElement(_materialUi.RaisedButton, { label: 'BRAINIFY ME', primary: false,
+	            onClick: clickFunc })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'best-box', className: 'button-box' },
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            stateObject.questions.best
+	          ),
+	          _react2.default.createElement(_materialUi.RaisedButton, { label: 'CONFER KNOWLEDGE', primary: false,
+	            onClick: clickFunc })
+	        )
+	      );
+	    } else if (true) {
+	      return _react2.default.createElement('div', { className: 'oracle-mini-DOM' });
+	    }
+	  },
 	  render: function render() {
-	    var props = this.props.specifics;
-	    var miniDOM = this.props.miniDOM;
+	    var props = this.props.stateTransfer;
+	    console.log("oracle's render has props of: ", props);
+	    var miniDOM = this.getMiniDOMFromSubState(props);
 	    return _react2.default.createElement(
 	      'div',
-	      null,
+	      { id: 'oracle-container' },
 	      _react2.default.createElement(
 	        'h1',
-	        null,
+	        { id: 'oracle-header' },
 	        props.headerText
 	      ),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'image-box' },
-	        _react2.default.createElement('img', { src: props.imageURL })
+	        _react2.default.createElement('img', { id: 'oracle-image', src: props.imageURL })
 	      ),
 	      miniDOM,
 	      _react2.default.createElement(

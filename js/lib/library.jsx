@@ -25,43 +25,39 @@ export default {
     oracle : {
       oracle : true,
       home : false,
-      specifics : {
-        miniDOM : (
-          <div>
-            <div>image goes here</div>
-            <div>other element goes here</div>
-          </div>
-        ),
-        headerText : "The mighty Oracle!",
-        imageURL : null
+      headerText : "The mighty Oracle!",
+      imageURL : null,
+      bestVideoURL : "",
+      stableImageURL : "",
+      singularityVideoURL : "",
+      subState : {
+        singularity : false,
+        stable : false,
+        best : false,
+        lastAnswered : ""
       },
-      subState : { answered : false }
+      questions : {
+        singularity : "Oracle, what will the singularity be like?",
+        stable :
+          "Oracle, how do we keep our minds and hearts stable in stressful times?",
+        best : "Oracle, what is best in life?",
+      }
     },
     info : {
       info : true,
       home : false,
       specifics : {
-        miniDOM : (
-          <div>
-            <div>image goes here</div>
-            <div>other element goes here</div>
-          </div>
-        ),
         headerText : "Here's My Deal",
         imageURL : null
       },
-      subState : { clicked : false }
+      subState : {
+        clicked : false
+      }
     },
     project : {
       project : true,
       home : false,
       specifics : {
-        miniDOM : (
-          <div>
-            <div>image goes here</div>
-            <div>other element goes here</div>
-          </div>
-        ),
         headerText : "Stuff I've Built",
         imageURL : null
       }

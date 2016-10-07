@@ -39,8 +39,7 @@ export default React.createClass({
       );
     } else if (state.oracle){
       return (
-        <Oracle clickHandler={this.onClick}
-          specifics={state.specifics} />
+        <Oracle clickHandler={this.onClick} stateTransfer={state} />
       );
     } else if (state.info){
       return (

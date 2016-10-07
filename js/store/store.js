@@ -63,7 +63,8 @@ AppDispatcher.register(function(action) {
       _state = HOME_STATE;
       AppStore.emitChange();
       break;
-    //default:
+    default:
+      console.log("RUH ROH, STATE DOESN'T KNOW THAT DITTY");
   }
 
 }); // close register function

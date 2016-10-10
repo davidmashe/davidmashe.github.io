@@ -21476,7 +21476,7 @@
 
 	var _library2 = _interopRequireDefault(_library);
 
-	var _oracle = __webpack_require__(546);
+	var _oracle = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./oracle.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _oracle2 = _interopRequireDefault(_oracle);
 
@@ -22282,6 +22282,9 @@
 	      home: false,
 	      headerText: "The mighty Oracle!",
 	      imageURL: null,
+	      bestVideoURL: "",
+	      stableImageURL: "",
+	      singularityVideoURL: "",
 	      subState: {
 	        singularity: false,
 	        stable: false,
@@ -59171,119 +59174,7 @@
 	// import AppStore from '../store/store.js';
 
 /***/ },
-/* 546 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(168);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _materialUi = __webpack_require__(184);
-
-	var _dispatcher = __webpack_require__(178);
-
-	var _dispatcher2 = _interopRequireDefault(_dispatcher);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// import AppLib from '../lib/library.jsx';
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'oracle',
-
-	  goBack: function goBack() {
-	    _dispatcher2.default.dispatch({ type: 'home' });
-	  },
-	  clickHandler: function clickHandler(event) {
-	    //modify this.props.stateObject, then...
-	    this.props.clickHandler(this.props.stateObject);
-	  },
-	  getMiniDOMFromSubState: function getMiniDOMFromSubState(stateObject) {
-	    var clickFunc = this.clickHandler;
-	    var singularityAsked = stateObject.singularity;
-	    var stableAsked = stateObject.stable;
-	    var bestAsked = stateObject.best;
-	    // each of the three child nodes below depends on a boolean,
-	    // i.e. singularity asked = true / false
-	    // hide asked = false, show lastAsked value
-	    if (!singularityAsked && !stableAsked && !bestAsked) {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'oracle-mini-DOM' },
-	        _react2.default.createElement(
-	          'div',
-	          { id: 'singularity-box', className: 'button-box' },
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            stateObject.questions.singularity
-	          ),
-	          _react2.default.createElement(_materialUi.RaisedButton, { label: 'GIVE ANSWER NOW', primary: false,
-	            onClick: clickFunc })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { id: 'stable-box', className: 'button-box' },
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            stateObject.questions.stable
-	          ),
-	          _react2.default.createElement(_materialUi.RaisedButton, { label: 'BRAINIFY ME', primary: false,
-	            onClick: clickFunc })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { id: 'best-box', className: 'button-box' },
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            stateObject.questions.best
-	          ),
-	          _react2.default.createElement(_materialUi.RaisedButton, { label: 'CONFER KNOWLEDGE', primary: false,
-	            onClick: clickFunc })
-	        )
-	      );
-	    } else if (true) {
-	      return _react2.default.createElement('div', { className: 'oracle-mini-DOM' });
-	    }
-	  },
-	  render: function render() {
-	    var props = this.props.stateTransfer;
-	    console.log("oracle's render has props of: ", props);
-	    var miniDOM = this.getMiniDOMFromSubState(props);
-	    return _react2.default.createElement(
-	      'div',
-	      { id: 'oracle-container' },
-	      _react2.default.createElement(
-	        'h1',
-	        { id: 'oracle-header' },
-	        props.headerText
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'image-box' },
-	        _react2.default.createElement('img', { id: 'oracle-image', src: props.imageURL })
-	      ),
-	      miniDOM,
-	      _react2.default.createElement(
-	        'div',
-	        { id: 'home-box', className: 'button-box' },
-	        _react2.default.createElement(_materialUi.RaisedButton, { label: '<-BACK', primary: true,
-	          onClick: this.props.clickHandler })
-	      )
-	    );
-	  }
-	});
-	// import AppStore from '../store/store.js';
-
-/***/ },
+/* 546 */,
 /* 547 */
 /***/ function(module, exports, __webpack_require__) {
 

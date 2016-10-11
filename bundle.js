@@ -21476,7 +21476,7 @@
 
 	var _library2 = _interopRequireDefault(_library);
 
-	var _oracle = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./oracle.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _oracle = __webpack_require__(546);
 
 	var _oracle2 = _interopRequireDefault(_oracle);
 
@@ -59174,7 +59174,168 @@
 	// import AppStore from '../store/store.js';
 
 /***/ },
-/* 546 */,
+/* 546 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(168);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _materialUi = __webpack_require__(184);
+
+	var _dispatcher = __webpack_require__(178);
+
+	var _dispatcher2 = _interopRequireDefault(_dispatcher);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// import AppLib from '../lib/library.jsx';
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'oracle',
+
+	  goBack: function goBack() {
+	    _dispatcher2.default.dispatch({ type: 'home' });
+	  },
+	  clickHandler: function clickHandler(event) {
+	    //modify this.props.stateObject, then...
+	    this.props.clickHandler(event);
+	  },
+	  getSingularityView: function getSingularityView(state, clickHandler) {
+	    var askNodes = state.lastAsked === 'singularity' ? _react2.default.createElement('div', null) : _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'div',
+	        { id: 'singularity-box', className: 'button-box' },
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          state.questions.best
+	        ),
+	        _react2.default.createElement(_materialUi.RaisedButton, { label: 'GIVE ANSWER NOW', primary: false,
+	          onClick: clickHandler })
+	      )
+	    );
+
+	    var image = state.lastAsked === 'singularity' ? _react2.default.createElement('iframe', { src: state.stableImageURL }) : null;
+
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      askNodes,
+	      _react2.default.createElement(
+	        'div',
+	        { id: 'singularity-display' },
+	        image
+	      )
+	    );
+	  },
+	  getStableView: function getStableView(state, clickHandler) {
+	    var askNodes = state.lastAsked === 'stable' ? _react2.default.createElement('div', null) : _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'div',
+	        { id: 'stable-box', className: 'button-box' },
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          state.questions.best
+	        ),
+	        _react2.default.createElement(_materialUi.RaisedButton, { label: 'BRAINIFY ME', primary: false,
+	          onClick: clickHandler })
+	      )
+	    );
+
+	    var image = state.lastAsked === 'stable' ? _react2.default.createElement('img', { src: state.stableImageURL }) : _react2.default.createElement('img', { src: null });
+
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      askNodes,
+	      _react2.default.createElement(
+	        'div',
+	        { id: 'stable-display' },
+	        image
+	      )
+	    );
+	  },
+	  getBestView: function getBestView(state, clickHandler) {
+	    var askNodes = state.lastAsked === 'best' ? _react2.default.createElement('div', null) : _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'div',
+	        { id: 'best-box', className: 'button-box' },
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          state.questions.best
+	        ),
+	        _react2.default.createElement(_materialUi.RaisedButton, { label: 'CONFER KNOWLEDGE', primary: false,
+	          onClick: clickHandler })
+	      )
+	    );
+
+	    var video = state.lastAsked === 'best' ? _react2.default.createElement('iframe', { src: state.bestVideoURL }) : null;
+
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      askNodes,
+	      _react2.default.createElement(
+	        'div',
+	        { id: 'best-display' },
+	        video
+	      )
+	    );
+	  },
+	  getMiniDOMFromSubState: function getMiniDOMFromSubState(stateObject) {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'oracle-mini-DOM' },
+	      this.getSingularityView(stateObject, this.clickHandler),
+	      this.getStableView(stateObject, this.clickHandler),
+	      this.getBestView(stateObject, this.clickHandler)
+	    );
+	  },
+	  render: function render() {
+	    var props = this.props.stateTransfer;
+	    console.log("oracle's render has props of: ", props);
+	    var miniDOM = this.getMiniDOMFromSubState(props);
+	    return _react2.default.createElement(
+	      'div',
+	      { id: 'oracle-container' },
+	      _react2.default.createElement(
+	        'h1',
+	        { id: 'oracle-header' },
+	        props.headerText
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'image-box' },
+	        _react2.default.createElement('img', { id: 'oracle-image', src: props.imageURL })
+	      ),
+	      miniDOM,
+	      _react2.default.createElement(
+	        'div',
+	        { id: 'home-box', className: 'button-box' },
+	        _react2.default.createElement(_materialUi.RaisedButton, { label: '<-BACK', primary: true,
+	          onClick: this.props.clickHandler })
+	      )
+	    );
+	  }
+	});
+	// import AppStore from '../store/store.js';
+
+/***/ },
 /* 547 */
 /***/ function(module, exports, __webpack_require__) {
 

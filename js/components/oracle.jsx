@@ -10,7 +10,7 @@ export default React.createClass({
   },
   clickHandler : function(event){
     //modify this.props.stateObject, then...
-    this.props.clickHandler(this.props.stateObject);
+    this.props.clickHandler(event);
   },
   getSingularityView : function(state,clickHandler){
     var askNodes = (state.lastAsked === 'singularity') ?
@@ -19,11 +19,12 @@ export default React.createClass({
         <div id="singularity-box" className="button-box">
           <p>{state.questions.best}</p>
           <RaisedButton label="GIVE ANSWER NOW" primary={false}
-            onClick={clickFunc} />
-        </div>) ;
+            onClick={clickHandler} />
+        </div>
+      </div>) ;
 
     var image = (state.lastAsked === 'singularity') ?
-      (<img src={state.stableImageURL} />) : (<img src={null} />) ;
+      (<iframe src={state.stableImageURL} />) : null ;
 
     return (
       <div>
@@ -36,13 +37,14 @@ export default React.createClass({
   },
   getStableView : function(state,clickHandler){
     var askNodes = (state.lastAsked === 'stable') ?
-      <div></div> :
-      <div>
+      (<div></div>) :
+      (<div>
         <div id="stable-box" className="button-box">
           <p>{state.questions.best}</p>
           <RaisedButton label="BRAINIFY ME" primary={false}
-            onClick={clickFunc} />
-        </div> ;
+            onClick={clickHandler} />
+        </div>
+      </div>);
 
     var image = (state.lastAsked === 'stable') ?
       <img src={state.stableImageURL} /> : <img src={null} /> ;
@@ -58,15 +60,17 @@ export default React.createClass({
   },
   getBestView : function(state,clickHandler){
     var askNodes = (state.lastAsked === 'best') ?
-      <div></div> :
-      <div id="best-box" className="button-box">
-        <p>{stateObject.questions.best}</p>
-        <RaisedButton label="CONFER KNOWLEDGE" primary={false}
-        onClick={clickFunc} />
-      </div> ;
+      (<div></div>) :
+      (<div>
+        <div id="best-box" className="button-box">
+        <p>{state.questions.best}</p>
+          <RaisedButton label="CONFER KNOWLEDGE" primary={false}
+          onClick={clickHandler} />
+        </div>
+      </div>);
 
     var video = (state.lastAsked === 'best') ?
-      <iframe src={state.bestVideoURL} /> : <iframe /> ;
+      <iframe src={state.bestVideoURL} /> : null ;
 
     return (
       <div>

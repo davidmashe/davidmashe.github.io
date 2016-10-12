@@ -8,6 +8,9 @@ var INFO_STATE = AppLib.stateTemplates.info;
 var MEETUP_STATE = AppLib.stateTemplates.meetup;
 var PROJECT_STATE = AppLib.stateTemplates.project;
 var HOME_STATE = AppLib.stateTemplates.home;
+// var BEST_SUB_STATE = AppLib.stateTemplates.bestSubState;
+// var STABLE_SUB_STATE = AppLib.stateTemplates.stableSubState;
+// var SINGULARITY_SUB_STATE = AppLib.stateTemplates.singularitySubState;
 
 var _state = HOME_STATE;
 
@@ -55,16 +58,27 @@ AppDispatcher.register(function(action) {
       _state = PROJECT_STATE;
       AppStore.emitChange();
       break;
-    // case 'meetup':
-    //   _state = MEETUP_STATE;
-    //   AppStore.emitChange();
-    //   break;
+    case 'best':
+      _state.subState.best = false
+      _state.subState.lastAnswered = 'best';
+      AppStore.emitChange();
+      break;
+    case 'singularity':
+      _state.subState.singularity = false;
+      _state.subState.lastAnswered = 'singularity';
+      AppStore.emitChange();
+      break;
+    case 'stable':
+    _state.subState.stable = false;
+    _state.subState.lastAnswered = 'stable';
+      AppStore.emitChange();
+      break;
     case 'home':
       _state = HOME_STATE;
       AppStore.emitChange();
       break;
     default:
-      console.log("RUH ROH, STATE DOESN'T KNOW THAT DITTY");
+      console.log("RUH ROH, STATE DOESN'T KNOW: ",type);
   }
 
 }); // close register function

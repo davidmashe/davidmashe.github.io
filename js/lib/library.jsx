@@ -31,9 +31,9 @@ export default {
       stableImageURL : "",
       singularityVideoURL : "",
       subState : {
-        singularity : false,
-        stable : false,
-        best : false,
+        singularity : true,
+        stable : true,
+        best : true,
         lastAnswered : ""
       },
       questions : {
@@ -64,8 +64,32 @@ export default {
     },
     home : {
         home : true,
-        defaultText : "Thanks for visiting my portfolio app! Built with React & Flux"
+        defaultText : "Thanks for visiting my portfolio app! Built with React & Flux",
+        subState : {
+          singularity : true,
+          stable : true,
+          best : true,
+          lastAnswered : ""
+        }
     }
+    // bestSubState : {
+    //   singularity : false,
+    //   stable : false,
+    //   best : true,
+    //   lastAnswered : "best"
+    // },
+    // stableSubState : {
+    //   singularity : false,
+    //   stable : true,
+    //   best : true,
+    //   lastAnswered : "stable"
+    // },
+    // singularitySubState : {
+    //   singularity : true,
+    //   stable : false,
+    //   best : true,
+    //   lastAnswered : "singularity"
+    // }
   }// close stateTemplates
 
 }

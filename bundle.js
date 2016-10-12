@@ -67,7 +67,8 @@
 	window.$ = "I said I built it in React, son!";
 	window.debug = true;
 
-	// window.say = function(...array){
+	// window.say = function(){
+	//   var args = arguments;
 	//   if (debug) console.log(array);
 	// };
 
@@ -21550,6 +21551,9 @@
 	var MEETUP_STATE = _library2.default.stateTemplates.meetup;
 	var PROJECT_STATE = _library2.default.stateTemplates.project;
 	var HOME_STATE = _library2.default.stateTemplates.home;
+	// var BEST_SUB_STATE = AppLib.stateTemplates.bestSubState;
+	// var STABLE_SUB_STATE = AppLib.stateTemplates.stableSubState;
+	// var SINGULARITY_SUB_STATE = AppLib.stateTemplates.singularitySubState;
 
 	var _state = HOME_STATE;
 
@@ -21598,16 +21602,27 @@
 	      _state = PROJECT_STATE;
 	      AppStore.emitChange();
 	      break;
-	    // case 'meetup':
-	    //   _state = MEETUP_STATE;
-	    //   AppStore.emitChange();
-	    //   break;
+	    case 'best':
+	      _state.subState.best = false;
+	      _state.subState.lastAnswered = 'best'; // TODO - no pre-fab sub-state, change each variable individually so that old choices persist
+	      AppStore.emitChange();
+	      break;
+	    case 'singularity':
+	      _state.subState.singularity = false;
+	      _state.subState.lastAnswered = 'singularity';
+	      AppStore.emitChange();
+	      break;
+	    case 'stable':
+	      _state.subState.stable = false;
+	      _state.subState.lastAnswered = 'stable';
+	      AppStore.emitChange();
+	      break;
 	    case 'home':
 	      _state = HOME_STATE;
 	      AppStore.emitChange();
 	      break;
 	    default:
-	      console.log("RUH ROH, STATE DOESN'T KNOW THAT DITTY");
+	      console.log("RUH ROH, STATE DOESN'T KNOW: ", type);
 	  }
 	}); // close register function
 
@@ -22286,9 +22301,9 @@
 	      stableImageURL: "",
 	      singularityVideoURL: "",
 	      subState: {
-	        singularity: false,
-	        stable: false,
-	        best: false,
+	        singularity: true,
+	        stable: true,
+	        best: true,
 	        lastAnswered: ""
 	      },
 	      questions: {
@@ -22318,8 +22333,32 @@
 	    },
 	    home: {
 	      home: true,
-	      defaultText: "Thanks for visiting my portfolio app! Built with React & Flux"
+	      defaultText: "Thanks for visiting my portfolio app! Built with React & Flux",
+	      subState: {
+	        singularity: true,
+	        stable: true,
+	        best: true,
+	        lastAnswered: ""
+	      }
 	    }
+	    // bestSubState : {
+	    //   singularity : false,
+	    //   stable : false,
+	    //   best : true,
+	    //   lastAnswered : "best"
+	    // },
+	    // stableSubState : {
+	    //   singularity : false,
+	    //   stable : true,
+	    //   best : true,
+	    //   lastAnswered : "stable"
+	    // },
+	    // singularitySubState : {
+	    //   singularity : true,
+	    //   stable : false,
+	    //   best : true,
+	    //   lastAnswered : "singularity"
+	    // }
 	  } // close stateTemplates
 
 	};
@@ -59208,23 +59247,30 @@
 	    this.props.clickHandler(event);
 	  },
 	  getSingularityView: function getSingularityView(state, clickHandler) {
-	    var askNodes = state.lastAsked === 'singularity' ? _react2.default.createElement('div', null) : _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
-	        'div',
-	        { id: 'singularity-box', className: 'button-box' },
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          state.questions.best
-	        ),
-	        _react2.default.createElement(_materialUi.RaisedButton, { label: 'GIVE ANSWER NOW', primary: false,
-	          onClick: clickHandler })
-	      )
-	    );
+	    var last = state.subState.lastAnswered;
 
-	    var image = state.lastAsked === 'singularity' ? _react2.default.createElement('iframe', { src: state.stableImageURL }) : null;
+	    var video = null;
+	    var askNodes = null;
+
+	    if (state.subState.singularity) {
+	      askNodes = _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'singularity-box', className: 'button-box' },
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            state.questions.singularity
+	          ),
+	          _react2.default.createElement(_materialUi.RaisedButton, { label: 'GIVE ANSWER NOW', primary: false,
+	            onClick: clickHandler })
+	        )
+	      );
+	    } else if (last === 'singularity') {
+	      video = _react2.default.createElement('iframe', { src: state.singularityVideoURL });
+	    }
 
 	    return _react2.default.createElement(
 	      'div',
@@ -59233,28 +59279,35 @@
 	      _react2.default.createElement(
 	        'div',
 	        { id: 'singularity-display' },
-	        image
+	        video
 	      )
 	    );
 	  },
 	  getStableView: function getStableView(state, clickHandler) {
-	    var askNodes = state.lastAsked === 'stable' ? _react2.default.createElement('div', null) : _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
-	        'div',
-	        { id: 'stable-box', className: 'button-box' },
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          state.questions.best
-	        ),
-	        _react2.default.createElement(_materialUi.RaisedButton, { label: 'BRAINIFY ME', primary: false,
-	          onClick: clickHandler })
-	      )
-	    );
+	    var last = state.subState.lastAnswered;
 
-	    var image = state.lastAsked === 'stable' ? _react2.default.createElement('img', { src: state.stableImageURL }) : _react2.default.createElement('img', { src: null });
+	    var image = null;
+	    var askNodes = null;
+
+	    if (state.subState.stable) {
+	      askNodes = _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'stable-box', className: 'button-box' },
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            state.questions.stable
+	          ),
+	          _react2.default.createElement(_materialUi.RaisedButton, { label: 'BRAINIFY ME', primary: false,
+	            onClick: clickHandler })
+	        )
+	      );
+	    } else if (last === 'stable') {
+	      image = _react2.default.createElement('img', { src: state.stableImageURL });
+	    }
 
 	    return _react2.default.createElement(
 	      'div',
@@ -59268,23 +59321,30 @@
 	    );
 	  },
 	  getBestView: function getBestView(state, clickHandler) {
-	    var askNodes = state.lastAsked === 'best' ? _react2.default.createElement('div', null) : _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
-	        'div',
-	        { id: 'best-box', className: 'button-box' },
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          state.questions.best
-	        ),
-	        _react2.default.createElement(_materialUi.RaisedButton, { label: 'CONFER KNOWLEDGE', primary: false,
-	          onClick: clickHandler })
-	      )
-	    );
+	    var last = state.subState.lastAnswered;
 
-	    var video = state.lastAsked === 'best' ? _react2.default.createElement('iframe', { src: state.bestVideoURL }) : null;
+	    var video = null;
+	    var askNodes = null;
+
+	    if (state.subState.best) {
+	      askNodes = _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'best-box', className: 'button-box' },
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            state.questions.best
+	          ),
+	          _react2.default.createElement(_materialUi.RaisedButton, { label: 'CONFER KNOWLEDGE', primary: false,
+	            onClick: clickHandler })
+	        )
+	      );
+	    } else if (last === 'best') {
+	      video = _react2.default.createElement('iframe', { src: state.bestVideoURL });
+	    }
 
 	    return _react2.default.createElement(
 	      'div',
@@ -59300,7 +59360,7 @@
 	  getMiniDOMFromSubState: function getMiniDOMFromSubState(stateObject) {
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'oracle-mini-DOM' },
+	      { className: 'oracle-mini-dom' },
 	      this.getSingularityView(stateObject, this.clickHandler),
 	      this.getStableView(stateObject, this.clickHandler),
 	      this.getBestView(stateObject, this.clickHandler)
@@ -59308,7 +59368,8 @@
 	  },
 	  render: function render() {
 	    var props = this.props.stateTransfer;
-	    console.log("oracle's render has props of: ", props);
+	    console.log("oracle got props of:", props);
+	    window.bruh = props;
 	    var miniDOM = this.getMiniDOMFromSubState(props);
 	    return _react2.default.createElement(
 	      'div',

@@ -1,7 +1,7 @@
 import {EventEmitter} from 'events';
 import assign from 'object-assign';
 import AppDispatcher from '../dispatcher/dispatcher.js';
-import AppLib from '../lib/library.jsx';
+import AppLib from '../lib/library.js';
 
 var ORACLE_STATE = AppLib.stateTemplates.oracle;
 var INFO_STATE = AppLib.stateTemplates.info;
@@ -69,8 +69,8 @@ AppDispatcher.register(function(action) {
       AppStore.emitChange();
       break;
     case 'stable':
-    _state.subState.stable = false;
-    _state.subState.lastAnswered = 'stable';
+      _state.subState.stable = false;
+      _state.subState.lastAnswered = 'stable';
       AppStore.emitChange();
       break;
     case 'home':

@@ -2,9 +2,30 @@ import React from 'react';
 import {RaisedButton} from 'material-ui';
 // import AppStore from '../store/store.js';
 import Dispatcher from '../dispatcher/dispatcher.js';
-// import AppLib from '../lib/library.jsx';
+// import AppLib from '../lib/library.js';
 
 export default React.createClass({
+  componentDidMount : function(){
+    console.log("oracle's componentDidMount fired");
+  },
+  componentWillMount : function(){
+    console.log("oracle's componentWillMount fired");
+  },
+  componentWillUnMount : function(){
+    console.log("oracle's componentWillUnMount fired");
+  },
+  componentWillReceiveProps : function(nextProps){
+    console.log("oracle.componentWillReceiveProps got:",nextProps);
+  },
+  // shouldComponentUpdate : function(nextProps,nextState){
+  //   console.log("oracle.shouldComponentUpdate props:",nextProps,"nextState:",nextState);
+  // },
+  componentWillUpdate : function(nextProps,nextState){
+    console.log("oracle.componentWillUpdate props:",nextProps,"nextState:",nextState);
+  },
+  componentDidUpdate : function(nextProps,nextState){
+    console.log("oracle.componentDidUpdate props:",nextProps,"nextState:",nextState);
+  },
   goBack : function(){
     Dispatcher.dispatch({type:'home'});
   },
@@ -29,7 +50,8 @@ export default React.createClass({
         </div>
       );
     } else if (last === 'singularity'){
-      video = <iframe src={state.singularityVideoURL} />;
+      video = <iframe src={state.singularityVideoURL}
+        width="420" height="315" />;
     }
 
     return (
@@ -87,7 +109,8 @@ export default React.createClass({
         </div>
       );
     } else if (last === 'best'){
-      video = <iframe src={state.bestVideoURL} />;
+      video = <iframe src={state.bestVideoURL}
+        width="420" height="315" />;
     }
 
     return (
@@ -110,8 +133,8 @@ export default React.createClass({
   },
   render : function(){
     var props = this.props.stateTransfer;
-    console.log("oracle got props of:",props);
-    window.bruh = props;
+    //console.log("oracle got props of:",props);
+    window.props = props;
     var miniDOM = this.getMiniDOMFromSubState(props);
     return (
       <div id="oracle-container" >

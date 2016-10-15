@@ -21493,11 +21493,18 @@
 	  componentDidMount: function componentDidMount() {
 	    _store2.default.changeSniffer(this.onChange);
 	  },
+	  // componentWillUnMount : function(){
+	  //   Store.killChangeSniffer(this.onChange);
+	  // },
 	  onChange: function onChange() {
+	    window.state = _store2.default.getState();
 	    this.setState(_store2.default.getState());
 	  },
 	  getInitialState: function getInitialState() {
 	    return _store2.default.getState();
+	  },
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    console.log("appcontainer.componentWillReceiveProps got:", nextProps);
 	  },
 	  onClick: function onClick(event) {
 	    //window.breh = event.nativeEvent;
@@ -21506,19 +21513,19 @@
 	    _dispatcher2.default.dispatch({ type: keyWord });
 	  },
 	  render: function render() {
-	    var state = this.state;
-	    if (debug) console.log("appcontainer state at render:", state);
-	    if (state.home) {
+
+	    if (debug) console.log("appcontainer state at render:", this.state);
+	    if (this.state.home) {
 	      return _react2.default.createElement(_home2.default, { clickHandler: this.onClick,
-	        text: state.defaultText });
-	    } else if (state.project) {
+	        text: this.state.headerText });
+	    } else if (this.state.project) {
 	      return _react2.default.createElement(_projects2.default, { clickHandler: this.onClick,
-	        specifics: state.specifics });
-	    } else if (state.oracle) {
-	      return _react2.default.createElement(_oracle2.default, { clickHandler: this.onClick, stateTransfer: state });
-	    } else if (state.info) {
+	        stateTransfer: this.state });
+	    } else if (this.state.oracle) {
+	      return _react2.default.createElement(_oracle2.default, { clickHandler: this.onClick, stateTransfer: this.state });
+	    } else if (this.state.info) {
 	      return _react2.default.createElement(_info2.default, { clickHandler: this.onClick,
-	        specifics: state.specifics });
+	        stateTransfer: this.state });
 	    }
 	  } // close render function
 	});
@@ -21604,7 +21611,7 @@
 	      break;
 	    case 'best':
 	      _state.subState.best = false;
-	      _state.subState.lastAnswered = 'best'; // TODO - no pre-fab sub-state, change each variable individually so that old choices persist
+	      _state.subState.lastAnswered = 'best';
 	      AppStore.emitChange();
 	      break;
 	    case 'singularity':
@@ -22256,19 +22263,13 @@
 
 /***/ },
 /* 182 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
-	var _react = __webpack_require__(168);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _getIdFromDOM(element) {
 	  if (element.className === "button-box") {
@@ -22287,6 +22288,19 @@
 	  }
 	}
 
+	var _constants = {
+	  bestVideoURL: "https://www.youtube.com/embed/Oo9buo9Mtos",
+	  stableImageURL: "http://www.fnstatic.co.uk/images/source/article/omg-chocolate-cake-7_1.jpg",
+	  singularityVideoURL: "https://www.youtube.com/embed/it0sf4CMDeM",
+	  oracleImage: "https://s-media-cache-ak0.pinimg.com/236x/1d/ed/cb/1dedcb4aafd298495bb9f4cf6d027698.jpg",
+	  oracleHeader: "The mighty Oracle!",
+	  infoHeader: "Here's My Deal",
+	  infoImage: "http://media3.giphy.com/media/wQzipgpBrekV2/giphy.gif",
+	  projectImage: "https://media2.giphy.com/media/4gXBZDVo2pezS/giphy.gif",
+	  projectHeader: "Stuff I've Built",
+	  homeText: "Thanks for visiting my portfolio app! Built with React & Flux"
+	};
+
 	exports.default = {
 	  getIdFromDOM: function getIdFromDOM(element) {
 	    return _getIdFromDOM(element);
@@ -22295,11 +22309,13 @@
 	    oracle: {
 	      oracle: true,
 	      home: false,
-	      headerText: "The mighty Oracle!",
-	      imageURL: null,
-	      bestVideoURL: "",
-	      stableImageURL: "",
-	      singularityVideoURL: "",
+	      info: false,
+	      project: false,
+	      headerText: _constants.oracleHeader,
+	      imageURL: _constants.oracleImage,
+	      bestVideoURL: _constants.bestVideoURL,
+	      stableImageURL: _constants.stableImageURL,
+	      singularityVideoURL: _constants.singularityVideoURL,
 	      subState: {
 	        singularity: true,
 	        stable: true,
@@ -22313,52 +22329,59 @@
 	      }
 	    },
 	    info: {
+	      oracle: false,
+	      home: false,
 	      info: true,
-	      home: false,
-	      specifics: {
-	        headerText: "Here's My Deal",
-	        imageURL: null
-	      },
-	      subState: {
-	        clicked: false
-	      }
-	    },
-	    project: {
-	      project: true,
-	      home: false,
-	      specifics: {
-	        headerText: "Stuff I've Built",
-	        imageURL: null
-	      }
-	    },
-	    home: {
-	      home: true,
-	      defaultText: "Thanks for visiting my portfolio app! Built with React & Flux",
+	      project: false,
+	      headerText: _constants.infoHeader,
+	      imageURL: _constants.oracleImage,
+	      bestVideoURL: _constants.bestVideoURL,
+	      stableImageURL: _constants.stableImageURL,
+	      singularityVideoURL: _constants.singularityVideoURL,
 	      subState: {
 	        singularity: true,
 	        stable: true,
 	        best: true,
 	        lastAnswered: ""
-	      }
+	      },
+	      questions: {}
+	    },
+	    project: {
+	      project: true,
+	      home: false,
+	      oracle: false,
+	      info: false,
+	      headerText: _constants.projectHeader,
+	      imageURL: _constants.oracleImage,
+	      bestVideoURL: _constants.bestVideoURL,
+	      stableImageURL: _constants.stableImageURL,
+	      singularityVideoURL: _constants.singularityVideoURL,
+	      subState: {
+	        singularity: true,
+	        stable: true,
+	        best: true,
+	        lastAnswered: ""
+	      },
+	      questions: {}
+	    },
+	    home: {
+	      home: true,
+	      oracle: false,
+	      info: false,
+	      project: false,
+	      headerText: _constants.homeText,
+	      imageURL: _constants.oracleImage,
+	      bestVideoURL: _constants.bestVideoURL,
+	      stableImageURL: _constants.stableImageURL,
+	      singularityVideoURL: _constants.singularityVideoURL,
+	      subState: {
+	        singularity: true,
+	        stable: true,
+	        best: true,
+	        lastAnswered: ""
+	      },
+	      questions: {}
 	    }
-	    // bestSubState : {
-	    //   singularity : false,
-	    //   stable : false,
-	    //   best : true,
-	    //   lastAnswered : "best"
-	    // },
-	    // stableSubState : {
-	    //   singularity : false,
-	    //   stable : true,
-	    //   best : true,
-	    //   lastAnswered : "stable"
-	    // },
-	    // singularitySubState : {
-	    //   singularity : true,
-	    //   stable : false,
-	    //   best : true,
-	    //   lastAnswered : "singularity"
-	    // }
 	  } // close stateTemplates
 
 	};
@@ -59234,11 +59257,32 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// import AppLib from '../lib/library.jsx';
+	// import AppLib from '../lib/library.js';
 
 	exports.default = _react2.default.createClass({
 	  displayName: 'oracle',
 
+	  componentDidMount: function componentDidMount() {
+	    console.log("oracle's componentDidMount fired");
+	  },
+	  componentWillMount: function componentWillMount() {
+	    console.log("oracle's componentWillMount fired");
+	  },
+	  componentWillUnMount: function componentWillUnMount() {
+	    console.log("oracle's componentWillUnMount fired");
+	  },
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    console.log("oracle.componentWillReceiveProps got:", nextProps);
+	  },
+	  // shouldComponentUpdate : function(nextProps,nextState){
+	  //   console.log("oracle.shouldComponentUpdate props:",nextProps,"nextState:",nextState);
+	  // },
+	  componentWillUpdate: function componentWillUpdate(nextProps, nextState) {
+	    console.log("oracle.componentWillUpdate props:", nextProps, "nextState:", nextState);
+	  },
+	  componentDidUpdate: function componentDidUpdate(nextProps, nextState) {
+	    console.log("oracle.componentDidUpdate props:", nextProps, "nextState:", nextState);
+	  },
 	  goBack: function goBack() {
 	    _dispatcher2.default.dispatch({ type: 'home' });
 	  },
@@ -59269,7 +59313,8 @@
 	        )
 	      );
 	    } else if (last === 'singularity') {
-	      video = _react2.default.createElement('iframe', { src: state.singularityVideoURL });
+	      video = _react2.default.createElement('iframe', { src: state.singularityVideoURL,
+	        width: '420', height: '315' });
 	    }
 
 	    return _react2.default.createElement(
@@ -59343,7 +59388,8 @@
 	        )
 	      );
 	    } else if (last === 'best') {
-	      video = _react2.default.createElement('iframe', { src: state.bestVideoURL });
+	      video = _react2.default.createElement('iframe', { src: state.bestVideoURL,
+	        width: '420', height: '315' });
 	    }
 
 	    return _react2.default.createElement(
@@ -59368,8 +59414,8 @@
 	  },
 	  render: function render() {
 	    var props = this.props.stateTransfer;
-	    console.log("oracle got props of:", props);
-	    window.bruh = props;
+	    //console.log("oracle got props of:",props);
+	    window.props = props;
 	    var miniDOM = this.getMiniDOMFromSubState(props);
 	    return _react2.default.createElement(
 	      'div',

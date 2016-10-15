@@ -4,7 +4,7 @@ import Store from '../store/store.js';
 import Dispatcher from '../dispatcher/dispatcher.js';
 import Home from './home.jsx';
 import Project from './projects.jsx';
-import Lib from '../lib/library.jsx';
+import Lib from '../lib/library.js';
 import Oracle from './oracle.jsx';
 import Info from './info.jsx';
 
@@ -12,11 +12,18 @@ export default React.createClass({
   componentDidMount : function(){
     Store.changeSniffer(this.onChange);
   },
+  // componentWillUnMount : function(){
+  //   Store.killChangeSniffer(this.onChange);
+  // },
   onChange : function(){
+    window.state = Store.getState();
     this.setState(Store.getState());
   },
   getInitialState : function(){
     return (Store.getState());
+  },
+  componentWillReceiveProps : function(nextProps){
+    console.log("appcontainer.componentWillReceiveProps got:",nextProps);
   },
   onClick : function(event){
     //window.breh = event.nativeEvent;
@@ -25,26 +32,26 @@ export default React.createClass({
     Dispatcher.dispatch({type:keyWord});
   },
   render : function(){
-    var state = this.state;
-    if (debug) console.log("appcontainer state at render:",state);
-    if (state.home){
+
+    if (debug) console.log("appcontainer state at render:",this.state);
+    if (this.state.home){
       return (
         <Home clickHandler={this.onClick}
-          text={state.defaultText} />
+          text={this.state.headerText} />
       );
-    } else if (state.project){
+    } else if (this.state.project){
       return (
         <Project clickHandler={this.onClick}
-          specifics={state.specifics} />
+          stateTransfer={this.state} />
       );
-    } else if (state.oracle){
+    } else if (this.state.oracle){
       return (
-        <Oracle clickHandler={this.onClick} stateTransfer={state} />
+        <Oracle clickHandler={this.onClick} stateTransfer={this.state} />
       );
-    } else if (state.info){
+    } else if (this.state.info){
       return (
         <Info clickHandler={this.onClick}
-          specifics={state.specifics} />
+          stateTransfer={this.state} />
       );
     }
   }// close render function

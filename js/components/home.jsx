@@ -5,14 +5,17 @@ import Lib from '../lib/library.js';
 export default React.createClass({
   render : function(){
     return (
-      <div>
-        <h1>Oh, why Hello!</h1>
+      <div className="container">
+        <Paper zDepth={4}>
+          <h1 className="headline">Oh, why Hello!</h1>
+        </Paper>
         <div>
-          <Paper>
-            <img src={this.props.image} />
+          <Paper zDepth={4}>
+            <img className="gif" src={this.props.image} />
+            <p className="text" >{this.props.text}</p>
           </Paper>
         </div>
-        <p>{this.props.text}</p>
+
         <div className="button-bucket">
           <div id="info-box" className="button-box">
             <RaisedButton id="info-button" onClick={this.props.clickHandler}

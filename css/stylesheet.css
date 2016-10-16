@@ -1,15 +1,33 @@
-/*.app-button {
-  width: 200px;
-  height:28px;
-}*/
+#master {
+  height : 80%;
+  width : 90%;
+  margin-left : 10%;
+  margin-top : 1%;
+}
+.gif {
+  width : 100%;
+}
+#oracle-image {
+  border-radius: 2px;
+}
+.headline  {
+  text-align: center;
+}
+.text {
+  text-align: center;
+}
+.container {
+  width: 80%;
+  height : 40%;
+}
 .app-button {
-  width: 40%;
-  height:30%;
+  width: 90%;
+  height:90%;
 }
 .button-box {
   margin-bottom : 2%;
   margin-top: 2%;
-  margin-left: 2%;
+  margin-left: 3%;
 }
 .button-bucket {
 

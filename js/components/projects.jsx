@@ -23,32 +23,31 @@ export default React.createClass({
   },
   render : function() {
     return (
-      <div>
-        <h1>{this.props.stateTransfer.headerText}</h1>
+      <div className="container" >
+        <h1 className="headline">{this.props.stateTransfer.headerText}</h1>
         <div className="image-box">
-          <Paper>
-            <img src={this.props.stateTransfer.imageURL} />
+          <Paper zDepth={4}>
+            <img className="gif" src={this.props.stateTransfer.imageURL} />
           </Paper>
         </div>
         <div id="project-box">
-          <Paper>
-            <p>{this.text.intro}</p>
+          <Paper zDepth={4}>
+            <p className="text" >{this.text.intro}</p>
             <ul>
-              <li>{this.text.introTwo}</li>
-              <li>{this.text.introThree}</li>
+              <li className="text" >{this.text.introTwo}</li>
+              <li className="text" >{this.text.introThree}</li>
             </ul>
           </Paper>
-          <Paper>
-            <p>{this.text.introSide}</p>
+          <Paper zDepth={4}>
+            <p className="text" >{this.text.introSide}</p>
             <ul>
-              <li>{this.text.two}</li>
-              <li>{this.text.three}</li>
-              <li>{this.text.four}</li>
-              <li>{this.text.five}</li>
-
+              <li className="text" >{this.text.two}</li>
+              <li className="text" >{this.text.three}</li>
+              <li className="text" >{this.text.four}</li>
+              <li className="text" >{this.text.five}</li>
             </ul>
           </Paper>
-          <Paper>
+          <Paper zDepth={4}>
             <p>{this.text.closer}</p>
           </Paper>
         </div>

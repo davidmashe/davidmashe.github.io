@@ -26,7 +26,7 @@ var _constants = {
   infoImage : "http://media3.giphy.com/media/wQzipgpBrekV2/giphy.gif",
   projectImage : "https://media4.giphy.com/media/o0vwzuFwCGAFO/200w.gif",
   projectHeader : "Stuff I've Built",
-  homeText : "Thanks for visiting! This was built with artisinal, locally-sourced react.js & flux.js",
+  homeText : "This was built with artisinal, locally-sourced react.js & flux.js",
   homeImage : "http://media0.giphy.com/media/FDTHjn1kJSud2/giphy.gif"
 };
 

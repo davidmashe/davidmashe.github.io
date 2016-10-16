@@ -36,22 +36,30 @@ export default React.createClass({
     if (debug) console.log("appcontainer state at render:",this.state);
     if (this.state.home){
       return (
-        <Home clickHandler={this.onClick}
-          text={this.state.headerText} image={this.state.imageURL}/>
+        <div id="master">
+          <Home clickHandler={this.onClick}
+            text={this.state.headerText} image={this.state.imageURL} />
+        </div>
       );
     } else if (this.state.project){
       return (
-        <Project clickHandler={this.onClick}
-          stateTransfer={this.state} />
+        <div id="master">
+          <Project clickHandler={this.onClick}
+            stateTransfer={this.state} />
+        </div>
       );
     } else if (this.state.oracle){
       return (
-        <Oracle clickHandler={this.onClick} stateTransfer={this.state} />
+        <div id="master">
+          <Oracle clickHandler={this.onClick} stateTransfer={this.state} />
+        </div>
       );
     } else if (this.state.info){
       return (
-        <Info clickHandler={this.onClick}
-          stateTransfer={this.state} />
+        <div id="master">
+          <Info clickHandler={this.onClick}
+            stateTransfer={this.state} />
+        </div>
       );
     }
   }// close render function

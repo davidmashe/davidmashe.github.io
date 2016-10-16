@@ -1,36 +1,30 @@
 import React from 'react';
-import {RaisedButton} from 'material-ui';
-// import AppStore from '../store/store.js';
+import {RaisedButton,Paper} from 'material-ui';
 import Dispatcher from '../dispatcher/dispatcher.js';
-// import AppLib from '../lib/library.js';
 
 export default React.createClass({
-  componentDidMount : function(){
-    console.log("oracle's componentDidMount fired");
-  },
-  componentWillMount : function(){
-    console.log("oracle's componentWillMount fired");
-  },
-  componentWillUnMount : function(){
-    console.log("oracle's componentWillUnMount fired");
-  },
-  componentWillReceiveProps : function(nextProps){
-    console.log("oracle.componentWillReceiveProps got:",nextProps);
-  },
+  // componentDidMount : function(){
+  //   console.log("oracle's componentDidMount fired");
+  // },
+  // componentWillMount : function(){
+  //   console.log("oracle's componentWillMount fired");
+  // },
+  // componentWillUnMount : function(){
+  //   console.log("oracle's componentWillUnMount fired");
+  // },
+  // componentWillReceiveProps : function(nextProps){
+  //   console.log("oracle.componentWillReceiveProps got:",nextProps);
+  // },
   // shouldComponentUpdate : function(nextProps,nextState){
   //   console.log("oracle.shouldComponentUpdate props:",nextProps,"nextState:",nextState);
   // },
-  componentWillUpdate : function(nextProps,nextState){
-    console.log("oracle.componentWillUpdate props:",nextProps,"nextState:",nextState);
-  },
-  componentDidUpdate : function(nextProps,nextState){
-    console.log("oracle.componentDidUpdate props:",nextProps,"nextState:",nextState);
-  },
-  goBack : function(){
-    Dispatcher.dispatch({type:'home'});
-  },
+  // componentWillUpdate : function(nextProps,nextState){
+  //   console.log("oracle.componentWillUpdate props:",nextProps,"nextState:",nextState);
+  // },
+  // componentDidUpdate : function(nextProps,nextState){
+  //   console.log("oracle.componentDidUpdate props:",nextProps,"nextState:",nextState);
+  // },
   clickHandler : function(event){
-    //modify this.props.stateObject, then...
     this.props.clickHandler(event);
   },
   getSingularityView : function(state,clickHandler){
@@ -43,7 +37,7 @@ export default React.createClass({
       askNodes = (
         <div>
           <div id="singularity-box" className="button-box">
-            <p>{state.questions.singularity}</p>
+            <p className="text" >{state.questions.singularity}</p>
             <RaisedButton label="GIVE ANSWER NOW" primary={false}
               onClick={clickHandler} />
           </div>
@@ -73,7 +67,7 @@ export default React.createClass({
       askNodes = (
         <div>
           <div id="stable-box" className="button-box">
-            <p>{state.questions.stable}</p>
+            <p className="text" >{state.questions.stable}</p>
             <RaisedButton label="BRAINIFY ME" primary={false}
               onClick={clickHandler} />
           </div>
@@ -102,7 +96,7 @@ export default React.createClass({
       askNodes = (
         <div>
           <div id="best-box" className="button-box">
-            <p>{state.questions.best}</p>
+            <p className="text" >{state.questions.best}</p>
             <RaisedButton label="CONFER KNOWLEDGE" primary={false}
               onClick={clickHandler} />
           </div>
@@ -137,8 +131,10 @@ export default React.createClass({
     window.props = props;
     var miniDOM = this.getMiniDOMFromSubState(props);
     return (
-      <div id="oracle-container" >
-        <h1 id="oracle-header">{props.headerText}</h1>
+      <div className="container" >
+        <Paper zDepth={4}>
+          <h1 className="headline">{props.headerText}</h1>
+        </Paper>
         <div className="image-box">
           <img id="oracle-image" src={props.imageURL} />
         </div>

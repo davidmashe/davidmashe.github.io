@@ -64,19 +64,23 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	window.$ = "I said I built it in React, son!";
-	window.debug = true;
+	onload = function onload() {
+	  var howYouDoin = document.getElementById("hey-react-how-you-doin");
+	  window.master = howYouDoin;
 
-	// window.say = function(){
-	//   var args = arguments;
-	//   if (debug) console.log(array);
-	// };
+	  // bootstrap? No way, I'm rollin my own
+	  howYouDoin.style.width = '' + window.innerWidth + 'px';
+	  howYouDoin.style.height = '' + window.innerHeight + 'px';
 
-	_reactDom2.default.render(_react2.default.createElement(
-	  _MuiThemeProvider2.default,
-	  null,
-	  _react2.default.createElement(_appcontainer2.default, null)
-	), document.getElementById("hey-react-how-you-doin"));
+	  window.$ = "I said I built it in React, son!";
+	  window.debug = true;
+
+	  _reactDom2.default.render(_react2.default.createElement(
+	    _MuiThemeProvider2.default,
+	    null,
+	    _react2.default.createElement(_appcontainer2.default, null)
+	  ), howYouDoin);
+	};
 
 /***/ },
 /* 1 */
@@ -21516,16 +21520,32 @@
 
 	    if (debug) console.log("appcontainer state at render:", this.state);
 	    if (this.state.home) {
-	      return _react2.default.createElement(_home2.default, { clickHandler: this.onClick,
-	        text: this.state.headerText, image: this.state.imageURL });
+	      return _react2.default.createElement(
+	        'div',
+	        { id: 'master' },
+	        _react2.default.createElement(_home2.default, { clickHandler: this.onClick,
+	          text: this.state.headerText, image: this.state.imageURL })
+	      );
 	    } else if (this.state.project) {
-	      return _react2.default.createElement(_projects2.default, { clickHandler: this.onClick,
-	        stateTransfer: this.state });
+	      return _react2.default.createElement(
+	        'div',
+	        { id: 'master' },
+	        _react2.default.createElement(_projects2.default, { clickHandler: this.onClick,
+	          stateTransfer: this.state })
+	      );
 	    } else if (this.state.oracle) {
-	      return _react2.default.createElement(_oracle2.default, { clickHandler: this.onClick, stateTransfer: this.state });
+	      return _react2.default.createElement(
+	        'div',
+	        { id: 'master' },
+	        _react2.default.createElement(_oracle2.default, { clickHandler: this.onClick, stateTransfer: this.state })
+	      );
 	    } else if (this.state.info) {
-	      return _react2.default.createElement(_info2.default, { clickHandler: this.onClick,
-	        stateTransfer: this.state });
+	      return _react2.default.createElement(
+	        'div',
+	        { id: 'master' },
+	        _react2.default.createElement(_info2.default, { clickHandler: this.onClick,
+	          stateTransfer: this.state })
+	      );
 	    }
 	  } // close render function
 	});
@@ -22298,7 +22318,7 @@
 	  infoImage: "http://media3.giphy.com/media/wQzipgpBrekV2/giphy.gif",
 	  projectImage: "https://media4.giphy.com/media/o0vwzuFwCGAFO/200w.gif",
 	  projectHeader: "Stuff I've Built",
-	  homeText: "Thanks for visiting! This was built with artisinal, locally-sourced react.js & flux.js",
+	  homeText: "This was built with artisinal, locally-sourced react.js & flux.js",
 	  homeImage: "http://media0.giphy.com/media/FDTHjn1kJSud2/giphy.gif"
 	};
 
@@ -22415,25 +22435,29 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      null,
+	      { className: 'container' },
 	      _react2.default.createElement(
-	        'h1',
-	        null,
-	        'Oh, why Hello!'
+	        _materialUi.Paper,
+	        { zDepth: 4 },
+	        _react2.default.createElement(
+	          'h1',
+	          { className: 'headline' },
+	          'Oh, why Hello!'
+	        )
 	      ),
 	      _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(
 	          _materialUi.Paper,
-	          null,
-	          _react2.default.createElement('img', { src: this.props.image })
+	          { zDepth: 4 },
+	          _react2.default.createElement('img', { className: 'gif', src: this.props.image }),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'text' },
+	            this.props.text
+	          )
 	        )
-	      ),
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        this.props.text
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -59235,10 +59259,10 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      null,
+	      { className: 'container' },
 	      _react2.default.createElement(
 	        'h1',
-	        null,
+	        { className: 'headline' },
 	        this.props.stateTransfer.headerText
 	      ),
 	      _react2.default.createElement(
@@ -59246,8 +59270,8 @@
 	        { className: 'image-box' },
 	        _react2.default.createElement(
 	          _materialUi.Paper,
-	          null,
-	          _react2.default.createElement('img', { src: this.props.stateTransfer.imageURL })
+	          { zDepth: 4 },
+	          _react2.default.createElement('img', { className: 'gif', src: this.props.stateTransfer.imageURL })
 	        )
 	      ),
 	      _react2.default.createElement(
@@ -59255,10 +59279,10 @@
 	        { id: 'project-box' },
 	        _react2.default.createElement(
 	          _materialUi.Paper,
-	          null,
+	          { zDepth: 4 },
 	          _react2.default.createElement(
 	            'p',
-	            null,
+	            { className: 'text' },
 	            this.text.intro
 	          ),
 	          _react2.default.createElement(
@@ -59266,22 +59290,22 @@
 	            null,
 	            _react2.default.createElement(
 	              'li',
-	              null,
+	              { className: 'text' },
 	              this.text.introTwo
 	            ),
 	            _react2.default.createElement(
 	              'li',
-	              null,
+	              { className: 'text' },
 	              this.text.introThree
 	            )
 	          )
 	        ),
 	        _react2.default.createElement(
 	          _materialUi.Paper,
-	          null,
+	          { zDepth: 4 },
 	          _react2.default.createElement(
 	            'p',
-	            null,
+	            { className: 'text' },
 	            this.text.introSide
 	          ),
 	          _react2.default.createElement(
@@ -59289,29 +59313,29 @@
 	            null,
 	            _react2.default.createElement(
 	              'li',
-	              null,
+	              { className: 'text' },
 	              this.text.two
 	            ),
 	            _react2.default.createElement(
 	              'li',
-	              null,
+	              { className: 'text' },
 	              this.text.three
 	            ),
 	            _react2.default.createElement(
 	              'li',
-	              null,
+	              { className: 'text' },
 	              this.text.four
 	            ),
 	            _react2.default.createElement(
 	              'li',
-	              null,
+	              { className: 'text' },
 	              this.text.five
 	            )
 	          )
 	        ),
 	        _react2.default.createElement(
 	          _materialUi.Paper,
-	          null,
+	          { zDepth: 4 },
 	          _react2.default.createElement(
 	            'p',
 	            null,
@@ -59352,37 +59376,31 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// import AppLib from '../lib/library.js';
-
 	exports.default = _react2.default.createClass({
 	  displayName: 'oracle',
 
-	  componentDidMount: function componentDidMount() {
-	    console.log("oracle's componentDidMount fired");
-	  },
-	  componentWillMount: function componentWillMount() {
-	    console.log("oracle's componentWillMount fired");
-	  },
-	  componentWillUnMount: function componentWillUnMount() {
-	    console.log("oracle's componentWillUnMount fired");
-	  },
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    console.log("oracle.componentWillReceiveProps got:", nextProps);
-	  },
+	  // componentDidMount : function(){
+	  //   console.log("oracle's componentDidMount fired");
+	  // },
+	  // componentWillMount : function(){
+	  //   console.log("oracle's componentWillMount fired");
+	  // },
+	  // componentWillUnMount : function(){
+	  //   console.log("oracle's componentWillUnMount fired");
+	  // },
+	  // componentWillReceiveProps : function(nextProps){
+	  //   console.log("oracle.componentWillReceiveProps got:",nextProps);
+	  // },
 	  // shouldComponentUpdate : function(nextProps,nextState){
 	  //   console.log("oracle.shouldComponentUpdate props:",nextProps,"nextState:",nextState);
 	  // },
-	  componentWillUpdate: function componentWillUpdate(nextProps, nextState) {
-	    console.log("oracle.componentWillUpdate props:", nextProps, "nextState:", nextState);
-	  },
-	  componentDidUpdate: function componentDidUpdate(nextProps, nextState) {
-	    console.log("oracle.componentDidUpdate props:", nextProps, "nextState:", nextState);
-	  },
-	  goBack: function goBack() {
-	    _dispatcher2.default.dispatch({ type: 'home' });
-	  },
+	  // componentWillUpdate : function(nextProps,nextState){
+	  //   console.log("oracle.componentWillUpdate props:",nextProps,"nextState:",nextState);
+	  // },
+	  // componentDidUpdate : function(nextProps,nextState){
+	  //   console.log("oracle.componentDidUpdate props:",nextProps,"nextState:",nextState);
+	  // },
 	  clickHandler: function clickHandler(event) {
-	    //modify this.props.stateObject, then...
 	    this.props.clickHandler(event);
 	  },
 	  getSingularityView: function getSingularityView(state, clickHandler) {
@@ -59400,7 +59418,7 @@
 	          { id: 'singularity-box', className: 'button-box' },
 	          _react2.default.createElement(
 	            'p',
-	            null,
+	            { className: 'text' },
 	            state.questions.singularity
 	          ),
 	          _react2.default.createElement(_materialUi.RaisedButton, { label: 'GIVE ANSWER NOW', primary: false,
@@ -59438,7 +59456,7 @@
 	          { id: 'stable-box', className: 'button-box' },
 	          _react2.default.createElement(
 	            'p',
-	            null,
+	            { className: 'text' },
 	            state.questions.stable
 	          ),
 	          _react2.default.createElement(_materialUi.RaisedButton, { label: 'BRAINIFY ME', primary: false,
@@ -59475,7 +59493,7 @@
 	          { id: 'best-box', className: 'button-box' },
 	          _react2.default.createElement(
 	            'p',
-	            null,
+	            { className: 'text' },
 	            state.questions.best
 	          ),
 	          _react2.default.createElement(_materialUi.RaisedButton, { label: 'CONFER KNOWLEDGE', primary: false,
@@ -59514,11 +59532,15 @@
 	    var miniDOM = this.getMiniDOMFromSubState(props);
 	    return _react2.default.createElement(
 	      'div',
-	      { id: 'oracle-container' },
+	      { className: 'container' },
 	      _react2.default.createElement(
-	        'h1',
-	        { id: 'oracle-header' },
-	        props.headerText
+	        _materialUi.Paper,
+	        { zDepth: 4 },
+	        _react2.default.createElement(
+	          'h1',
+	          { className: 'headline' },
+	          props.headerText
+	        )
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -59535,7 +59557,6 @@
 	    );
 	  }
 	});
-	// import AppStore from '../store/store.js';
 
 /***/ },
 /* 547 */
@@ -59559,21 +59580,15 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// import AppLib from '../lib/library.jsx';
-
 	exports.default = _react2.default.createClass({
 	  displayName: 'info',
 
-	  // goBack : function(){
-	  //   Dispatcher.dispatch({type:'home'});
-	  // },
 	  strings: {
 	    email: "davidmashe@gmail.com",
 	    linkedin: "linkedin.com/in/davidmashe",
 	    github: "github.com/davidmashe",
 	    meetup: "https://www.meetup.com/nyc-bootcampers-anonymous",
 	    resume: "http://davidmashe.github.io/Sept_2016_resume.pdf"
-	    // resume : "file:///home/david/davidmashe.github.io/Sept_2016_resume.pdf"
 	  },
 	  resumeRedirect: function resumeRedirect() {
 	    window.location.href = this.strings.resume;
@@ -59582,22 +59597,26 @@
 	    window.location.href = this.strings.meetup;
 	  },
 	  render: function render() {
-	    console.log("props:", this.props);
+	    if (debug) console.log("info props @ render:", this.props);
 	    return _react2.default.createElement(
 	      'div',
-	      null,
+	      { className: 'container' },
 	      _react2.default.createElement(
-	        'h1',
-	        null,
-	        this.props.stateTransfer.headerText
+	        _materialUi.Paper,
+	        { zDepth: 4 },
+	        _react2.default.createElement(
+	          'h1',
+	          { className: 'headline' },
+	          this.props.stateTransfer.headerText
+	        )
 	      ),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'image-box' },
 	        _react2.default.createElement(
 	          _materialUi.Paper,
-	          null,
-	          _react2.default.createElement('img', { src: this.props.stateTransfer.imageURL })
+	          { zDepth: 4 },
+	          _react2.default.createElement('img', { className: 'gif', src: this.props.stateTransfer.imageURL })
 	        )
 	      ),
 	      _react2.default.createElement(
@@ -59605,33 +59624,28 @@
 	        { id: 'info-box' },
 	        _react2.default.createElement(
 	          _materialUi.Paper,
-	          null,
+	          { zDepth: 4 },
 	          _react2.default.createElement(
 	            'p',
-	            null,
+	            { className: 'text' },
 	            this.strings.email
 	          ),
 	          _react2.default.createElement(
 	            'p',
-	            null,
+	            { className: 'text' },
 	            this.strings.linkedin
 	          ),
 	          _react2.default.createElement(
 	            'p',
-	            null,
+	            { className: 'text' },
 	            this.strings.github
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            null,
-	            _react2.default.createElement(_materialUi.RaisedButton, { label: 'GO TO RESUME DOCUMENT', primary: true,
+	            { className: 'button-box' },
+	            _react2.default.createElement(_materialUi.RaisedButton, { className: 'app-button',
+	              label: 'GO TO RESUME DOCUMENT', primary: true,
 	              onClick: this.resumeRedirect })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(_materialUi.RaisedButton, { label: 'GO TO MEETUP PAGE', primary: false,
-	              onClick: this.meetupRedirect })
 	          )
 	        )
 	      ),
@@ -59644,7 +59658,6 @@
 	    );
 	  }
 	});
-	// import AppStore from '../store/store.js';
 
 /***/ }
 /******/ ]);

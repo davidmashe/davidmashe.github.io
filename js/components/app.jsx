@@ -3,16 +3,20 @@ import React from 'react';
 import AppContainer from './appcontainer.jsx';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-window.$ = "I said I built it in React, son!";
-window.debug = true;
+onload = function(){
+  var howYouDoin = document.getElementById("hey-react-how-you-doin");
+  window.master = howYouDoin;
 
-// window.say = function(){
-//   var args = arguments;
-//   if (debug) console.log(array);
-// };
+  // bootstrap? No way, I'm rollin my own
+  howYouDoin.style.width = '' + window.innerWidth + 'px';
+  howYouDoin.style.height = '' + window.innerHeight + 'px';
 
-ReactDOM.render(
-  <MuiThemeProvider>
-    <AppContainer />
-  </MuiThemeProvider>,
-  document.getElementById("hey-react-how-you-doin"));
+  window.$ = "I said I built it in React, son!";
+  window.debug = true;
+
+  ReactDOM.render(
+    <MuiThemeProvider>
+      <AppContainer />
+    </MuiThemeProvider>,
+    howYouDoin);
+}

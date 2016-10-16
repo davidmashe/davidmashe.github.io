@@ -1,11 +1,17 @@
 import React from 'react';
-import {RaisedButton} from 'material-ui';
+import {RaisedButton,Paper} from 'material-ui';
+import Lib from '../lib/library.js';
 
 export default React.createClass({
   render : function(){
     return (
       <div>
-        <h1>Hey Breh!</h1>
+        <h1>Oh, why Hello!</h1>
+        <div>
+          <Paper>
+            <img src={this.props.image} />
+          </Paper>
+        </div>
         <p>{this.props.text}</p>
         <div className="button-bucket">
           <div id="info-box" className="button-box">

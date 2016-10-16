@@ -37,7 +37,7 @@ export default React.createClass({
     if (this.state.home){
       return (
         <Home clickHandler={this.onClick}
-          text={this.state.headerText} />
+          text={this.state.headerText} image={this.state.imageURL}/>
       );
     } else if (this.state.project){
       return (

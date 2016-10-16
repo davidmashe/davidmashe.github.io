@@ -21517,7 +21517,7 @@
 	    if (debug) console.log("appcontainer state at render:", this.state);
 	    if (this.state.home) {
 	      return _react2.default.createElement(_home2.default, { clickHandler: this.onClick,
-	        text: this.state.headerText });
+	        text: this.state.headerText, image: this.state.imageURL });
 	    } else if (this.state.project) {
 	      return _react2.default.createElement(_projects2.default, { clickHandler: this.onClick,
 	        stateTransfer: this.state });
@@ -22296,9 +22296,10 @@
 	  oracleHeader: "The mighty Oracle!",
 	  infoHeader: "Here's My Deal",
 	  infoImage: "http://media3.giphy.com/media/wQzipgpBrekV2/giphy.gif",
-	  projectImage: "https://media2.giphy.com/media/4gXBZDVo2pezS/giphy.gif",
+	  projectImage: "https://media4.giphy.com/media/o0vwzuFwCGAFO/200w.gif",
 	  projectHeader: "Stuff I've Built",
-	  homeText: "Thanks for visiting my portfolio app! Built with React & Flux"
+	  homeText: "Thanks for visiting! This was built with artisinal, locally-sourced react.js & flux.js",
+	  homeImage: "http://media0.giphy.com/media/FDTHjn1kJSud2/giphy.gif"
 	};
 
 	exports.default = {
@@ -22370,7 +22371,7 @@
 	      info: false,
 	      project: false,
 	      headerText: _constants.homeText,
-	      imageURL: _constants.oracleImage,
+	      imageURL: _constants.homeImage,
 	      bestVideoURL: _constants.bestVideoURL,
 	      stableImageURL: _constants.stableImageURL,
 	      singularityVideoURL: _constants.singularityVideoURL,
@@ -22402,6 +22403,10 @@
 
 	var _materialUi = __webpack_require__(184);
 
+	var _library = __webpack_require__(182);
+
+	var _library2 = _interopRequireDefault(_library);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
@@ -22414,7 +22419,16 @@
 	      _react2.default.createElement(
 	        'h1',
 	        null,
-	        'Hey Breh!'
+	        'Oh, why Hello!'
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          _materialUi.Paper,
+	          null,
+	          _react2.default.createElement('img', { src: this.props.image })
+	        )
 	      ),
 	      _react2.default.createElement(
 	        'p',
@@ -59213,10 +59227,10 @@
 	    introThree: "worked with Oracle (SQL) to model & access data",
 	    introSide: "On the side I've recently played with: ",
 	    two: "full-stack apps with node.js,express, and react.js/flux.js",
-	    three: "building my own data models in a local postgreSQL instance.",
+	    three: "building/querying my own data models in a local postgreSQL instance.",
 	    four: "simple webscrapers in python",
 	    five: "simple Android app",
-	    closer: "If you're looking for an engineer, I'd be happy to show you some of it."
+	    closer: "If you're looking for an engineer, I'd be happy to show you some of my work."
 	  },
 	  render: function render() {
 	    return _react2.default.createElement(
@@ -59292,12 +59306,16 @@
 	              'li',
 	              null,
 	              this.text.five
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              null,
-	              this.text.closer
 	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _materialUi.Paper,
+	          null,
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            this.text.closer
 	          )
 	        )
 	      ),
@@ -59553,11 +59571,15 @@
 	    email: "davidmashe@gmail.com",
 	    linkedin: "linkedin.com/in/davidmashe",
 	    github: "github.com/davidmashe",
-	    // resume : "http://davidmashe.github.io/Sept_2016_resume.pdf"
-	    resume: "file:///home/david/davidmashe.github.io/Sept_2016_resume.pdf"
+	    meetup: "https://www.meetup.com/nyc-bootcampers-anonymous",
+	    resume: "http://davidmashe.github.io/Sept_2016_resume.pdf"
+	    // resume : "file:///home/david/davidmashe.github.io/Sept_2016_resume.pdf"
 	  },
 	  resumeRedirect: function resumeRedirect() {
 	    window.location.href = this.strings.resume;
+	  },
+	  meetupRedirect: function meetupRedirect() {
+	    window.location.href = this.strings.meetup;
 	  },
 	  render: function render() {
 	    console.log("props:", this.props);
@@ -59592,15 +59614,25 @@
 	          _react2.default.createElement(
 	            'p',
 	            null,
-	            this.strings.email
+	            this.strings.linkedin
 	          ),
 	          _react2.default.createElement(
 	            'p',
 	            null,
-	            this.strings.email
+	            this.strings.github
 	          ),
-	          _react2.default.createElement(_materialUi.RaisedButton, { label: 'GO TO RESUME DOCUMENT', primary: true,
-	            onClick: this.resumeRedirect })
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(_materialUi.RaisedButton, { label: 'GO TO RESUME DOCUMENT', primary: true,
+	              onClick: this.resumeRedirect })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(_materialUi.RaisedButton, { label: 'GO TO MEETUP PAGE', primary: false,
+	              onClick: this.meetupRedirect })
+	          )
 	        )
 	      ),
 	      _react2.default.createElement(

@@ -24,9 +24,10 @@ var _constants = {
   oracleHeader : "The mighty Oracle!",
   infoHeader : "Here's My Deal",
   infoImage : "http://media3.giphy.com/media/wQzipgpBrekV2/giphy.gif",
-  projectImage : "https://media2.giphy.com/media/4gXBZDVo2pezS/giphy.gif",
+  projectImage : "https://media4.giphy.com/media/o0vwzuFwCGAFO/200w.gif",
   projectHeader : "Stuff I've Built",
-  homeText : "Thanks for visiting my portfolio app! Built with React & Flux"
+  homeText : "Thanks for visiting! This was built with artisinal, locally-sourced react.js & flux.js",
+  homeImage : "http://media0.giphy.com/media/FDTHjn1kJSud2/giphy.gif"
 };
 
 export default {
@@ -99,7 +100,7 @@ export default {
         info: false,
         project : false,
         headerText : _constants.homeText,
-        imageURL : _constants.oracleImage,
+        imageURL : _constants.homeImage,
         bestVideoURL : _constants.bestVideoURL,
         stableImageURL : _constants.stableImageURL,
         singularityVideoURL : _constants.singularityVideoURL,

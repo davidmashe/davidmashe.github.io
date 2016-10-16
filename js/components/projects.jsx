@@ -16,10 +16,10 @@ export default React.createClass({
     introThree : "worked with Oracle (SQL) to model & access data",
     introSide : "On the side I've recently played with: ",
     two : "full-stack apps with node.js,express, and react.js/flux.js",
-    three : "building my own data models in a local postgreSQL instance.",
+    three : "building/querying my own data models in a local postgreSQL instance.",
     four : "simple webscrapers in python",
     five : "simple Android app",
-    closer : "If you're looking for an engineer, I'd be happy to show you some of it."
+    closer : "If you're looking for an engineer, I'd be happy to show you some of my work."
   },
   render : function() {
     return (
@@ -45,8 +45,11 @@ export default React.createClass({
               <li>{this.text.three}</li>
               <li>{this.text.four}</li>
               <li>{this.text.five}</li>
-              <li>{this.text.closer}</li>
+
             </ul>
+          </Paper>
+          <Paper>
+            <p>{this.text.closer}</p>
           </Paper>
         </div>
         <div id="home-box" className="button-box">

@@ -22334,7 +22334,7 @@
 	      info: true,
 	      project: false,
 	      headerText: _constants.infoHeader,
-	      imageURL: _constants.oracleImage,
+	      imageURL: _constants.infoImage,
 	      bestVideoURL: _constants.bestVideoURL,
 	      stableImageURL: _constants.stableImageURL,
 	      singularityVideoURL: _constants.singularityVideoURL,
@@ -22352,7 +22352,7 @@
 	      oracle: false,
 	      info: false,
 	      headerText: _constants.projectHeader,
-	      imageURL: _constants.oracleImage,
+	      imageURL: _constants.projectImage,
 	      bestVideoURL: _constants.bestVideoURL,
 	      stableImageURL: _constants.stableImageURL,
 	      singularityVideoURL: _constants.singularityVideoURL,
@@ -59204,26 +59204,103 @@
 	exports.default = _react2.default.createClass({
 	  displayName: 'projects',
 
-	  goBack: function goBack() {
-	    _dispatcher2.default.dispatch({ type: 'home' });
+	  // goBack : function(){
+	  //   Dispatcher.dispatch({type:'home'});
+	  // },
+	  text: {
+	    intro: "Everyday I build part of a REST API in java. On the job I've also:",
+	    introTwo: "done support front-end work (vanilla js, html & css)",
+	    introThree: "worked with Oracle (SQL) to model & access data",
+	    introSide: "On the side I've recently played with: ",
+	    two: "full-stack apps with node.js,express, and react.js/flux.js",
+	    three: "building my own data models in a local postgreSQL instance.",
+	    four: "simple webscrapers in python",
+	    five: "simple Android app",
+	    closer: "If you're looking for an engineer, I'd be happy to show you some of it."
 	  },
 	  render: function render() {
-	    var demProps = this.props.specifics;
-	    var miniDOM = this.props.miniDOM;
 	    return _react2.default.createElement(
 	      'div',
 	      null,
 	      _react2.default.createElement(
 	        'h1',
 	        null,
-	        demProps.headerText
+	        this.props.stateTransfer.headerText
 	      ),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'image-box' },
-	        _react2.default.createElement('img', { src: demProps.imageURL })
+	        _react2.default.createElement(
+	          _materialUi.Paper,
+	          null,
+	          _react2.default.createElement('img', { src: this.props.stateTransfer.imageURL })
+	        )
 	      ),
-	      miniDOM,
+	      _react2.default.createElement(
+	        'div',
+	        { id: 'project-box' },
+	        _react2.default.createElement(
+	          _materialUi.Paper,
+	          null,
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            this.text.intro
+	          ),
+	          _react2.default.createElement(
+	            'ul',
+	            null,
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              this.text.introTwo
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              this.text.introThree
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _materialUi.Paper,
+	          null,
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            this.text.introSide
+	          ),
+	          _react2.default.createElement(
+	            'ul',
+	            null,
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              this.text.two
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              this.text.three
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              this.text.four
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              this.text.five
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              this.text.closer
+	            )
+	          )
+	        )
+	      ),
 	      _react2.default.createElement(
 	        'div',
 	        { id: 'home-box', className: 'button-box' },
@@ -59469,26 +59546,63 @@
 	exports.default = _react2.default.createClass({
 	  displayName: 'info',
 
-	  goBack: function goBack() {
-	    _dispatcher2.default.dispatch({ type: 'home' });
+	  // goBack : function(){
+	  //   Dispatcher.dispatch({type:'home'});
+	  // },
+	  strings: {
+	    email: "davidmashe@gmail.com",
+	    linkedin: "linkedin.com/in/davidmashe",
+	    github: "github.com/davidmashe",
+	    // resume : "http://davidmashe.github.io/Sept_2016_resume.pdf"
+	    resume: "file:///home/david/davidmashe.github.io/Sept_2016_resume.pdf"
+	  },
+	  resumeRedirect: function resumeRedirect() {
+	    window.location.href = this.strings.resume;
 	  },
 	  render: function render() {
-	    var demProps = this.props.specifics;
-	    var miniDOM = this.props.miniDOM;
+	    console.log("props:", this.props);
 	    return _react2.default.createElement(
 	      'div',
 	      null,
 	      _react2.default.createElement(
 	        'h1',
 	        null,
-	        demProps.headerText
+	        this.props.stateTransfer.headerText
 	      ),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'image-box' },
-	        _react2.default.createElement('img', { src: demProps.imageURL })
+	        _react2.default.createElement(
+	          _materialUi.Paper,
+	          null,
+	          _react2.default.createElement('img', { src: this.props.stateTransfer.imageURL })
+	        )
 	      ),
-	      miniDOM,
+	      _react2.default.createElement(
+	        'div',
+	        { id: 'info-box' },
+	        _react2.default.createElement(
+	          _materialUi.Paper,
+	          null,
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            this.strings.email
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            this.strings.email
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            this.strings.email
+	          ),
+	          _react2.default.createElement(_materialUi.RaisedButton, { label: 'GO TO RESUME DOCUMENT', primary: true,
+	            onClick: this.resumeRedirect })
+	        )
+	      ),
 	      _react2.default.createElement(
 	        'div',
 	        { id: 'home-box', className: 'button-box' },

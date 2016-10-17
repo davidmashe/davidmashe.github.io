@@ -3,7 +3,19 @@ import {RaisedButton,Paper} from 'material-ui';
 import Lib from '../lib/library.js';
 
 export default React.createClass({
+  getButtonStyle : function(){
+    return {
+      height : "40px"
+    };
+  },
+  getLabelStyle : function(){
+    return {
+      fontSize : "30px"
+    };
+  },  
   render : function(){
+    var buttonStyle = this.getButtonStyle();
+    var labelStyle = this.getLabelStyle();
     return (
       <div className="container">
         <Paper zDepth={4}>
@@ -19,15 +31,18 @@ export default React.createClass({
         <div className="button-bucket">
           <div id="info-box" className="button-box">
             <RaisedButton id="info-button" onClick={this.props.clickHandler}
-              label="RESUME & INFO" primary={true} className="app-button" />
+              label="RESUME & INFO" primary={true} className="app-button" 
+              fullWidth={true} style={buttonStyle} labelStyle={labelStyle} />
           </div>
           <div id="project-box" className="button-box">
             <RaisedButton id="projects-button" onClick={this.props.clickHandler}
-              label="PROJECTS" primary={false} className="app-button" />
+              label="PROJECTS" primary={false} className="app-button" 
+              fullWidth={true} style={buttonStyle} labelStyle={labelStyle} />
           </div>
           <div id="oracle-box" className="button-box">
             <RaisedButton id="oracle-button" onClick={this.props.clickHandler}
-              label="ASK THE ORACLE" secondary={true} className="app-button" />
+              label="ASK THE ORACLE" secondary={true} className="app-button" 
+              fullWidth={true} style={buttonStyle} labelStyle={labelStyle} />
           </div>
         </div>
       </div>

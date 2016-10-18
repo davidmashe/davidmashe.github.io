@@ -5,7 +5,7 @@ import Lib from '../lib/library.js';
 export default React.createClass({
   getButtonStyle : function(){
     return {
-      height : "40px"
+      height : "100%"
     };
   },
   getLabelStyle : function(){
@@ -18,11 +18,11 @@ export default React.createClass({
     var labelStyle = this.getLabelStyle();
     return (
       <div className="container">
-        <Paper zDepth={4}>
+        <Paper zDepth={4} className="papel" >
           <h1 className="headline">Oh, why Hello!</h1>
         </Paper>
         <div>
-          <Paper zDepth={4}>
+          <Paper zDepth={4} className="papel" >
             <img className="gif" src={this.props.image} />
             <p className="text" >{this.props.text}</p>
           </Paper>
@@ -36,7 +36,7 @@ export default React.createClass({
           </div>
           <div id="project-box" className="button-box">
             <RaisedButton id="projects-button" onClick={this.props.clickHandler}
-              label="PROJECTS" primary={false} className="app-button" 
+              label="WHAT I'VE DONE" primary={false} className="app-button" 
               fullWidth={true} style={buttonStyle} labelStyle={labelStyle} />
           </div>
           <div id="oracle-box" className="button-box">

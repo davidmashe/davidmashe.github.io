@@ -22457,7 +22457,8 @@
 
 	  getButtonStyle: function getButtonStyle() {
 	    return {
-	      height: "40px"
+	      height: "100%",
+	      boxShadow: "rgba(0,0,0,0.3)"
 	    };
 	  },
 	  getLabelStyle: function getLabelStyle() {
@@ -22473,7 +22474,7 @@
 	      { className: 'container' },
 	      _react2.default.createElement(
 	        _materialUi.Paper,
-	        { zDepth: 4 },
+	        { zDepth: 4, className: 'papel' },
 	        _react2.default.createElement(
 	          'h1',
 	          { className: 'headline' },
@@ -22485,7 +22486,7 @@
 	        null,
 	        _react2.default.createElement(
 	          _materialUi.Paper,
-	          { zDepth: 4 },
+	          { zDepth: 4, className: 'papel' },
 	          _react2.default.createElement('img', { className: 'gif', src: this.props.image }),
 	          _react2.default.createElement(
 	            'p',
@@ -22508,15 +22509,15 @@
 	          'div',
 	          { id: 'project-box', className: 'button-box' },
 	          _react2.default.createElement(_materialUi.RaisedButton, { id: 'projects-button', onClick: this.props.clickHandler,
-	            label: 'PROJECTS', primary: false, className: 'app-button',
-	            fullWidth: true, style: buttonStyle })
+	            label: 'WHAT I\'VE DONE', primary: false, className: 'app-button',
+	            fullWidth: true, style: buttonStyle, labelStyle: labelStyle })
 	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { id: 'oracle-box', className: 'button-box' },
 	          _react2.default.createElement(_materialUi.RaisedButton, { id: 'oracle-button', onClick: this.props.clickHandler,
 	            label: 'ASK THE ORACLE', secondary: true, className: 'app-button',
-	            fullWidth: true, style: buttonStyle })
+	            fullWidth: true, style: buttonStyle, labelStyle: labelStyle })
 	        )
 	      )
 	    );

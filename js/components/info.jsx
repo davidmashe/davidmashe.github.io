@@ -16,7 +16,19 @@ export default React.createClass({
   meetupRedirect : function() {
     window.location.href = this.strings.meetup;
   },
+  getButtonStyle : function(){
+    return {
+      height : "100%"
+    };
+  },
+  getLabelStyle : function(){
+    return {
+      fontSize : "30px"
+    };
+  },   
   render : function(){
+    var buttonStyle = this.getButtonStyle();
+    var labelStyle = this.getLabelStyle();
     if (debug) console.log("info props @ render:",this.props);
     return (
       <div className="container" >
@@ -36,7 +48,8 @@ export default React.createClass({
             <div className="button-box">
               <RaisedButton className="app-button"
                 label="GO TO RESUME DOCUMENT" primary={true}
-                onClick={this.resumeRedirect} />
+                onClick={this.resumeRedirect} 
+                fullWidth={true} style={buttonStyle} labelStyle={labelStyle}/>
             </div>
           </Paper>
         </div>

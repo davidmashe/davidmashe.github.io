@@ -12,8 +12,17 @@ export default React.createClass({
     return {
       fontSize : "30px"
     };
-  },  
+  },
   render : function(){
+    var oracleBox = (
+      <div id="oracle-box" className="button-box">
+        <RaisedButton id="oracle-button" onClick={this.props.clickHandler}
+          label="ASK THE ORACLE" secondary={true} className="app-button"
+          fullWidth={true} style={buttonStyle} labelStyle={labelStyle} />
+      </div>
+    );
+    oracleBox = null; //temp
+
     var buttonStyle = this.getButtonStyle();
     var labelStyle = this.getLabelStyle();
     return (
@@ -30,20 +39,16 @@ export default React.createClass({
 
         <div className="button-bucket">
           <div id="info-box" className="button-box">
-            <RaisedButton id="info-button" onClick={this.props.clickHandler}
-              label="RESUME & INFO" primary={true} className="app-button" 
+            <RaisedButton onClick={this.props.clickHandler}
+              label="RESUME PDF" primary={true} className="app-button"
               fullWidth={true} style={buttonStyle} labelStyle={labelStyle} />
           </div>
           <div id="project-box" className="button-box">
-            <RaisedButton id="projects-button" onClick={this.props.clickHandler}
-              label="WHAT I'VE DONE" primary={false} className="app-button" 
+            <RaisedButton onClick={this.props.clickHandler}
+              label="WHAT I'VE DONE" secondary={true} className="app-button"
               fullWidth={true} style={buttonStyle} labelStyle={labelStyle} />
           </div>
-          <div id="oracle-box" className="button-box">
-            <RaisedButton id="oracle-button" onClick={this.props.clickHandler}
-              label="ASK THE ORACLE" secondary={true} className="app-button" 
-              fullWidth={true} style={buttonStyle} labelStyle={labelStyle} />
-          </div>
+          {oracleBox}
         </div>
       </div>
     );

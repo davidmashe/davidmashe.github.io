@@ -47,8 +47,9 @@ AppDispatcher.register(function(action) {
       AppStore.emitChange();
       break;
     case 'info':
-      _state = INFO_STATE;
-      AppStore.emitChange();
+      // _state = INFO_STATE;
+      // AppStore.emitChange();
+      window.location.href = "http://davidmashe.github.io/Sept_2016_resume.pdf";
       break;
     case 'oracle':
       _state = ORACLE_STATE;

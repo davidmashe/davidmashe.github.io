@@ -25,7 +25,7 @@ export default React.createClass({
     return {
       fontSize : "30px"
     };
-  },   
+  },
   render : function(){
     var buttonStyle = this.getButtonStyle();
     var labelStyle = this.getLabelStyle();
@@ -48,7 +48,7 @@ export default React.createClass({
             <div className="button-box">
               <RaisedButton className="app-button"
                 label="GO TO RESUME DOCUMENT" primary={true}
-                onClick={this.resumeRedirect} 
+                onClick={this.resumeRedirect}
                 fullWidth={true} style={buttonStyle} labelStyle={labelStyle}/>
             </div>
           </Paper>

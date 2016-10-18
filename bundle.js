@@ -22457,8 +22457,7 @@
 
 	  getButtonStyle: function getButtonStyle() {
 	    return {
-	      height: "100%",
-	      boxShadow: "rgba(0,0,0,0.3)"
+	      height: "100%"
 	    };
 	  },
 	  getLabelStyle: function getLabelStyle() {
@@ -58728,7 +58727,7 @@
 	        { className: 'image-box' },
 	        _react2.default.createElement(
 	          _materialUi.Paper,
-	          { zDepth: 4 },
+	          { zDepth: 4, className: 'papel' },
 	          _react2.default.createElement('img', { className: 'gif', src: this.props.stateTransfer.imageURL })
 	        )
 	      ),
@@ -58737,7 +58736,7 @@
 	        { id: 'project-box' },
 	        _react2.default.createElement(
 	          _materialUi.Paper,
-	          { zDepth: 4 },
+	          { zDepth: 4, className: 'papel' },
 	          _react2.default.createElement(
 	            'p',
 	            { className: 'text' },
@@ -58760,7 +58759,7 @@
 	        ),
 	        _react2.default.createElement(
 	          _materialUi.Paper,
-	          { zDepth: 4 },
+	          { zDepth: 4, className: 'papel' },
 	          _react2.default.createElement(
 	            'p',
 	            { className: 'text' },
@@ -58793,7 +58792,7 @@
 	        ),
 	        _react2.default.createElement(
 	          _materialUi.Paper,
-	          { zDepth: 4 },
+	          { zDepth: 4, className: 'papel' },
 	          _react2.default.createElement(
 	            'p',
 	            null,

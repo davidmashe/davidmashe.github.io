@@ -26,19 +26,19 @@ export default React.createClass({
       <div className="container" >
         <h1 className="headline">{this.props.stateTransfer.headerText}</h1>
         <div className="image-box">
-          <Paper zDepth={4}>
+          <Paper zDepth={4} className="papel" >
             <img className="gif" src={this.props.stateTransfer.imageURL} />
           </Paper>
         </div>
         <div id="project-box">
-          <Paper zDepth={4}>
+          <Paper zDepth={4} className="papel" >
             <p className="text" >{this.text.intro}</p>
             <ul>
               <li className="text" >{this.text.introTwo}</li>
               <li className="text" >{this.text.introThree}</li>
             </ul>
           </Paper>
-          <Paper zDepth={4}>
+          <Paper zDepth={4} className="papel" >
             <p className="text" >{this.text.introSide}</p>
             <ul>
               <li className="text" >{this.text.two}</li>
@@ -47,7 +47,7 @@ export default React.createClass({
               <li className="text" >{this.text.five}</li>
             </ul>
           </Paper>
-          <Paper zDepth={4}>
+          <Paper zDepth={4} className="papel" >
             <p>{this.text.closer}</p>
           </Paper>
         </div>

@@ -49,7 +49,7 @@ AppDispatcher.register(function(action) {
     case 'info':
       // _state = INFO_STATE;
       // AppStore.emitChange();
-      window.location.href = "http://davidmashe.github.io/Sept_2016_resume.pdf";
+      window.location.href = "http://davidmashe.github.io/resume.pdf";
       break;
     case 'oracle':
       _state = ORACLE_STATE;

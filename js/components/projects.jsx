@@ -27,14 +27,16 @@ export default React.createClass({
       // display: 'inline-block',
   },
   text : {
-    intro : "Everyday I build part of a REST API in java. On the job I've also:",
+    intro : "On the job, I'm either building an API in Java or a GUI in React. I've also:",
     introTwo : "done support front-end work (vanilla js, html & css)",
     introThree : "worked with Oracle (SQL) to model & access data",
     introSide : "On the side I've recently played with: ",
-    two : "full-stack apps with node.js,express, and react.js/flux.js",
+    two : "full-stack apps with node.js, express, and react.js/flux.js",
     three : "building/querying my own data models in a local postgreSQL instance.",
     four : "simple webscrapers in python",
     five : "simple Android app",
+    six:"played around with simple servers in golang",
+    seven:"started an open source project: ",
     closer : "If you're looking for an engineer, I'd be happy to show you some of my work."
   },
   render : function() {
@@ -63,6 +65,12 @@ export default React.createClass({
               <li className="bullets" >{this.text.three}</li>
               <li className="bullets" >{this.text.four}</li>
               <li className="bullets" >{this.text.five}</li>
+              <li className="bullets" >{this.text.six}</li>
+              <li className="bullets" >
+                {this.text.seven}
+                &nbsp;
+                <a href="http://www.github.com/davidmashe/applilanche">see it</a>
+              </li>
             </ul>
           </Paper>
           <Paper zDepth={4} className="papel" >
